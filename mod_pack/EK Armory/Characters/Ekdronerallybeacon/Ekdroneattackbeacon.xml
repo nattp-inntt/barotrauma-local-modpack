@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Charactervariant inherit="Ekdronerallybeacon" speciesname="Ekdroneattackbeacon" speciestranslationoverride="" displayname="" tags="ekdroneattackbeacon" hasinfo="False" />
+</Override>

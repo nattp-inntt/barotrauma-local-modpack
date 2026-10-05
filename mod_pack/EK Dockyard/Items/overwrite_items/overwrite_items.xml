@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Items>
+    <!--氚，這邊也加一個，才不會有人少裝1個MOD，中子轟擊鋰，增加鋰的消耗合成後item數2變1，產出的材料取整，合成後剩下燃料棒，1個價值大約等同以前的0.5個-->
+    <!-- 8/6 增加販賣 -->
+    <Item name="" identifier="ek_weapontritium" category="Material" tags="smallitem,ek_fabricator_parts" subcategory="ekr_dockyard_r" cargocontaineridentifier="metalcrate" scale="0.5" pickdistance="150" impactsoundtag="impact_metal_light" maxstacksize="32">
+      <PreferredContainer secondary="wreckstoragecab" amount="1" spawnprobability="0.02" />
+      <Price baseprice="250" sold="false" minleveldifficulty="35">
+        <Price storeidentifier="merchantoutpost" multiplier="0.6" />
+        <Price storeidentifier="merchantcity" multiplier="0.9" />
+        <Price storeidentifier="merchantresearch" multiplier="1.2" sold="true" minavailable="1" maxavailable="2" />
+        <Price storeidentifier="merchantmilitary" multiplier="1.0" minavailable="0" maxavailable="1" />
+        <Price storeidentifier="merchantmine" multiplier="1.0" minavailable="0" maxavailable="1" />
+        <Price storeidentifier="merchantengineering" multiplier="1.25" sold="true" minavailable="1" maxavailable="2" />
+      </Price>
+      <Fabricate suitablefabricators="fabricator" requiredtime="240" outcondition="1.0">
+        <RequiredSkill identifier="medical" level="40" />
+        <RequiredSkill identifier="electrical" level="50" />
+        <RequiredItem identifier="fuelrod" mincondition="0.495" usecondition="true" />
+        <RequiredItem identifier="lithium" />
+        <RequiredItem identifier="lithium" />
+      </Fabricate>
+      <InventoryIcon texture="%ModDir%/Items/overwrite_items/materials_ek.png" sourcerect="0,0,64,64" />
+      <Sprite texture="%ModDir%/Items/overwrite_items/materials_ek.png" depth="0.54" sourcerect="128,0,64,96" />
+      <Body width="50" height="79" density="10" />
+      <!-- 修正手持的姿勢錯誤 -->
+      <Holdable slots="Any,RightHand,LeftHand" handle1="0,0" msg="ItemMsgPickUpSelect" canBeCombined="true" removeOnCombined="true">
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <!--氦3，從礦石中提取-->
+    <Item name="氦3" identifier="ekr_Helium3" category="Material" tags="smallitem,ek_fabricator_parts" subcategory="ekr_dockyard_r" cargocontaineridentifier="metalcrate" scale="0.5" pickdistance="150" impactsoundtag="impact_metal_light" maxstacksize="32">
+      <PreferredContainer secondary="wreckstoragecab" amount="1" spawnprobability="0.02" />
+      <Price baseprice="125" sold="false" minleveldifficulty="35">
+        <Price storeidentifier="merchantoutpost" multiplier="0.6" />
+        <Price storeidentifier="merchantcity" multiplier="0.9" />
+        <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" minavailable="1" maxavailable="2" />
+        <Price storeidentifier="merchantmilitary" multiplier="1.0" sold="true" minavailable="0" maxavailable="1" />
+        <Price storeidentifier="merchantmine" multiplier="1.0" sold="true" minavailable="0" maxavailable="1" />
+        <Price storeidentifier="merchantengineering" multiplier="1.0" sold="true" minavailable="1" maxavailable="2" />
+      </Price>
+      <Fabricate suitablefabricators="fabricator" displayname="ekr_refining1" requiredtime="10">
+        <RequiredSkill identifier="mechanical" level="35" />
+        <RequiredItem identifier="thorianite" />
+      </Fabricate>
+      <Fabricate suitablefabricators="fabricator" displayname="ekr_refining2" requiredtime="10">
+        <RequiredSkill identifier="mechanical" level="35" />
+        <RequiredItem identifier="uraniumore" />
+      </Fabricate>
+      <Fabricate suitablefabricators="fabricator" displayname="ekr_refining3" requiredtime="10">
+        <RequiredSkill identifier="mechanical" level="35" />
+        <RequiredItem identifier="brockite" />
+      </Fabricate>
+      <Fabricate suitablefabricators="fabricator" displayname="ekr_refining4" requiredtime="10">
+        <RequiredSkill identifier="mechanical" level="35" />
+        <RequiredItem identifier="ilmenite" />
+      </Fabricate>
+      <InventoryIcon texture="%ModDir%/Items/overwrite_items/materials_ek.png" sourcerect="0,124,66,66" />
+      <Sprite texture="%ModDir%/Items/overwrite_items/materials_ek.png" depth="0.54" sourcerect="128,97,64,96" />
+      <Body width="50" height="79" density="10" />
+      <Holdable slots="Any,RightHand,LeftHand" handle1="0,0" msg="ItemMsgPickUpSelect" canBeCombined="true" removeOnCombined="true">
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Items>
+</Override>

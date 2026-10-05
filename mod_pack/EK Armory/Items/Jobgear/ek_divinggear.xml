@@ -1,0 +1,1462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <Override>
+    <!-- Mk-I軍用動力裝甲，重作 -->
+    <!-- 因應新版改動provocative TAG改成human -->
+    <!-- 1/27，增加爆炸傷害抗性15%  -->
+    <Item name="" identifier="ek_armored_hardsuit" subcategory="ekr_armory_individual_weapon" aliases="military_hardsuit,armored hardsuit,armored_hardsuit" category="Equipment,Diving" tags="diving,deepdiving,human,divingsuit,light,ek_armored_hardsuit,disallowduplicatedeconstructoutput" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="4">
+      <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
+      <Price baseprice="2825" sold="false" />
+      <Fabricate suitablefabricators="fabricator" requiredtime="80">
+        <RequiredSkill identifier="weapons" level="50" />
+        <RequiredSkill identifier="mechanical" level="60" />
+        <RequiredItem identifier="abyssdivingsuit" />
+        <!-- 550 -->
+        <RequiredItem identifier="combatdivingsuit" />
+        <!-- 560 -->
+        <RequiredItem identifier="titaniumaluminiumalloy" amount="4" />
+        <!-- 600 -->
+        <RequiredItem identifier="ballisticfiber" amount="4" />
+        <!-- 640 -->
+        <RequiredItem identifier="ek_weaponparts" />
+        <!-- 455 -->
+      </Fabricate>
+      <Deconstruct time="40">
+        <Item identifier="abyssdivingsuit" />
+        <Item identifier="combatdivingsuit" />
+        <Item identifier="titaniumaluminiumalloy" amount="2" />
+        <Item identifier="ballisticfiber" amount="2" />
+        <Item identifier="ek_weaponparts" outcondition="0.5" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/InventoryIcons.png" sourcerect="0,448,64,64" />
+      <Sprite name="Diving Suit Item" texture="%ModDir%/Items/Jobgear/ek_divinggear.png" sourcerect="130,0,124,128" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Items/Jobgear/armored_diving_suit_inlocker.png" sourcerect="12,30,77,209" depth="0.55" origin="-0.12,-0.13" />
+      <ContainedSprite name="Diving Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/Jobgear/ek_divinggear.png" sourcerect="134,134,248,59" depth="0.55" origin="0.58,0.5" />
+      <!-- 質量提升到30 -->
+      <Body radius="45" width="34" density="30" />
+      <!-- 自定義介面，開關潛水服燈光，GUI變透明的 -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.10,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+        <TickBox text="ekr.suitlights" IsOn="true">
+          <StatusEffect type="OnUse" target="This" IsOn="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+        </TickBox>
+      </CustomInterface>
+      <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpUse" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" canbeselected="false" canbepicked="true" pickkey="Use" allowswappingwhenpicked="false" />
+      <!-- 引怪範圍 -->
+      <aitarget maxsightrange="1500" />
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/ek_divinggear.png" limb="Head" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inheritorigin="false" inherittexturescale="false" sourcerect="256,0,96,96" origin="0.5,0.55" scale="0.4">
+          <!-- 燈光，頭燈 -->
+          <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/lightcone.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="Torso" inheritlimbdepth="true" hidelimb="true" hideotherwearables="false" inheritorigin="false" inherittexturescale="false" sourcerect="0,0,128,256" scale="0.4">
+          <!-- 另一個燈光...這是胸口的燈???? -->
+          <LightComponent range="400.0" lightcolor="250,224,165,40" powerconsumption="10" IsOn="true" allowingameediting="false" canbeselected="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/pointlight_bright.png" origin="0.5, 0.56" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="Waist" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.44,0.71" sourcerect="0,416,96,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="RightForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="192,16,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="LeftForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="192,144,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="RightHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="LeftHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="RightArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="128,0,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="LeftArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="128,128,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="RightThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="80,256,96,160" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="LeftThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="176,256,96,160" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="RightLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="96,416,80,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="LeftLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="176,416,80,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="RightFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit.png" limb="LeftFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <!-- 穿戴時缺氧，必須有氧氣罐 -->
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" UseHullOxygen="false" />
+        <!-- 穿戴時的移動速度等效果以及音效 -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" PressureProtection="6000.0" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true">
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" loop="true" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="250" loop="true" />
+        </StatusEffect>
+        <!-- 當潛水服被容納時補充氧氣。 -->
+        <StatusEffect type="OnContained" target="Contained" Condition="1.0" targetslot="0" interval="1" disabledeltatime="true">
+          <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+          <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1000.0" Condition="-0.3" comparison="Or">
+          <Conditional IsDead="false" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" Condition="-0.5" interval="0.5" disabledeltatime="true">
+          <Conditional IsDead="false" />
+          <RequiredItem items="weldingfueltank" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" Oxygen="-10.0" Condition="-0.5" interval="0.5" disabledeltatime="true">
+          <Conditional IsDead="false" />
+          <RequiredItem items="incendiumfueltank" type="Contained" />
+          <Affliction identifier="burn" amount="3.0" />
+        </StatusEffect>
+        <!-- 防禦屬性 -->
+        <!-- 5%機率免疫傷害 -->
+        <!-- 常見傷害-70% -->
+        <!-- 內傷與內臟損傷-15% -->
+        <!-- 減80流血 -->
+        <!-- 減50燒傷 -->
+        <!-- 減15%暈眩，5%機率免疫暈眩 -->
+        <!-- 免疫輻射傷害 -->
+        <!-- 90%免疫畫皮，感染速度下降10% -->
+        <!-- 麻痺15%減傷15%免疫 -->
+        <!-- 幻覺-60% -->
+        <!-- 免疫腦震盪 -->
+        <!-- 水流抵抗5% -->
+        <!-- 遠程武器射速提升5% -->
+        <!-- 10/29 內傷與內臟損傷抗性各提升5%，麻痺抗性+5%，幻覺抗性+20%，裝備時武器射速提升5% -->
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound,bitewounds" armorsector="0.0,360.0" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage,organdamage,internaldamage" damagemultiplier="0.85" damagesound="LimbArmor" />
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.2" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.50" />
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.85" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.0" damagesound="LimbArmor" />
+        <damagemodifier afflictionidentifiers="huskinfection" armorsector="0.0,360.0" probabilitymultiplier="0.1" damagemultiplier="0.9" damagesound="LimbArmor" />
+        <damagemodifier afflictiontypes="paralysis" armorsector="0.0,360.0" damagemultiplier="0.85" probabilitymultiplier="0.85" damagesound="LimbArmor" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="hallucinating" damagemultiplier="0.4" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="concussion" damagemultiplier="0.0" damagesound="" deflectprojectiles="true" />
+        <StatValue stattype="FlowResistance" value="0.75" />
+        <StatValue stattype="PropulsionSpeed" value="-0.3" />
+        <StatValue stattype="WalkingSpeed" value="-0.5" />
+        <!-- 給予氣胸-75%、骨折-25%的抗性 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.9" disabledeltatime="true">
+          <Affliction identifier="EKR_pneumothorax_resistance_075" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_dislocation_resistance_025" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+      </Wearable>
+      <!-- 和戰鬥潛水服一致，必須升到MK-II才能自動注射 -->
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="tank">
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+        <Containable items="weldingtoolfuel" excludeditems="oxygenitetank" />
+        <Containable items="oxygensource" excludeditems="oxygenitetank">
+          <StatusEffect type="OnWearing" target="Contained">
+            <RequiredItem items="oxygensource" type="Contained" />
+            <Conditional condition="lt 5.0" />
+            <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+          </StatusEffect>
+        </Containable>
+        <Containable items="oxygenitetank">
+          <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.3" setvalue="true" targetslot="0">
+            <Conditional IsDead="false" />
+          </StatusEffect>
+        </Containable>
+        <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+          <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+          <Conditional condition="lte 0.0" />
+          <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+        </StatusEffect>
+      </ItemContainer>
+    </Item>
+    <!-- Mk-I軍用動力裝甲（海盜塗裝） -->
+    <Item name="" identifier="ek_armored_hardsuit_paintbandit" subcategory="ekr_armory_individual_weapon" aliases="military_hardsuit,armored hardsuit,armored_hardsuit" category="Equipment,Diving" tags="diving,deepdiving,human,divingsuit,light,ek_armored_hardsuit,disallowduplicatedeconstructoutput" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="4">
+      <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
+      <Price baseprice="2965" sold="false" />
+      <!-- Paint Variants -->
+      <Fabricate suitablefabricators="fabricator" requiredtime="4">
+        <RequiredItem identifier="ek_armored_hardsuit" />
+        <RequiredItem identifier="redpaint" />
+      </Fabricate>
+      <Deconstruct time="5">
+        <Item identifier="ek_armored_hardsuit" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" sourcerect="384,448,64,64" />
+      <Sprite name="Diving Suit Item" texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit_item.png" sourcerect="2,0,124,128" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit_inlocker.png" sourcerect="12,30,77,209" depth="0.55" origin="-0.12,-0.13" />
+      <ContainedSprite name="Diving Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit_item.png" sourcerect="6,134,248,59" depth="0.55" origin="0.58,0.5" />
+      <Body radius="45" width="34" density="30" />
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.10,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+        <TickBox text="ekr.suitlights" IsOn="true">
+          <StatusEffect type="OnUse" target="This" IsOn="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+        </TickBox>
+      </CustomInterface>
+      <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpUse" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" canbeselected="false" canbepicked="true" pickkey="Use" allowswappingwhenpicked="false" />
+      <!-- 引怪範圍 -->
+      <aitarget maxsightrange="1500" />
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="Head" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inheritorigin="false" inherittexturescale="false" sourcerect="304,16,96,96" origin="0.5,0.5" scale="0.4">
+          <!-- 燈光，頭燈 -->
+          <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/lightcone.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="Torso" inheritlimbdepth="true" hidelimb="true" hideotherwearables="false" inherittexturescale="false" inheritorigin="false" sourcerect="0,0,128,256" scale="0.4">
+          <!-- 另一個燈光...這是胸口的燈???? -->
+          <LightComponent range="400.0" lightcolor="250,224,165,40" powerconsumption="10" IsOn="true" allowingameediting="false" canbeselected="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/pointlight_bright.png" origin="0.5, 0.56" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="Waist" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.44,0.71" sourcerect="0,416,96,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="RightForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="192,16,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="LeftForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="192,144,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="RightHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="LeftHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="RightArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="128,0,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="LeftArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="128,128,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="RightThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="80,256,96,160" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="LeftThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="176,256,96,160" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="RightLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="96,416,80,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="LeftLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="176,416,80,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="RightFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintbandit.png" limb="LeftFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <!-- 穿戴時缺氧，必須有氧氣罐 -->
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" UseHullOxygen="false" />
+        <!-- 穿戴時的移動速度等效果以及音效 -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" PressureProtection="6000.0" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true">
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" loop="true" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="250" loop="true" />
+        </StatusEffect>
+        <!-- 當潛水服被容納時補充氧氣。 -->
+        <StatusEffect type="OnContained" target="Contained" Condition="1.0" targetslot="0" interval="1" disabledeltatime="true">
+          <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+          <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1000.0" Condition="-0.3" comparison="Or">
+          <Conditional IsDead="false" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" Condition="-0.5" interval="0.5" disabledeltatime="true">
+          <Conditional IsDead="false" />
+          <RequiredItem items="weldingfueltank" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" Oxygen="-10.0" Condition="-0.5" interval="0.5" disabledeltatime="true">
+          <Conditional IsDead="false" />
+          <RequiredItem items="incendiumfueltank" type="Contained" />
+          <Affliction identifier="burn" amount="3.0" />
+        </StatusEffect>
+        <!-- 防禦屬性 -->
+        <!-- 5%機率免疫傷害 -->
+        <!-- 常見傷害-70% -->
+        <!-- 內傷與內臟損傷-15% -->
+        <!-- 減80流血 -->
+        <!-- 減50燒傷 -->
+        <!-- 減15%暈眩，5%機率免疫暈眩 -->
+        <!-- 免疫輻射傷害 -->
+        <!-- 90%免疫畫皮，感染速度下降10% -->
+        <!-- 麻痺15%減傷15%免疫 -->
+        <!-- 幻覺-60% -->
+        <!-- 免疫腦震盪 -->
+        <!-- 水流抵抗5% -->
+        <!-- 武器射速提升5% -->
+        <!-- 10/29 內傷與內臟損傷抗性各提升5%，麻痺抗性+5%，幻覺抗性+20%，裝備時武器射速提升5% -->
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound,bitewounds" armorsector="0.0,360.0" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage,organdamage,internaldamage" damagemultiplier="0.85" damagesound="LimbArmor" />
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.2" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.50" />
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.85" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.0" damagesound="LimbArmor" />
+        <damagemodifier afflictionidentifiers="huskinfection" armorsector="0.0,360.0" probabilitymultiplier="0.1" damagemultiplier="0.9" damagesound="LimbArmor" />
+        <damagemodifier afflictiontypes="paralysis" armorsector="0.0,360.0" damagemultiplier="0.85" probabilitymultiplier="0.85" damagesound="LimbArmor" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="hallucinating" damagemultiplier="0.4" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="concussion" damagemultiplier="0.0" damagesound="" deflectprojectiles="true" />
+        <StatValue stattype="FlowResistance" value="0.75" />
+        <StatValue stattype="PropulsionSpeed" value="-0.3" />
+        <StatValue stattype="WalkingSpeed" value="-0.5" />
+        <!-- 給予氣胸-75%、骨折-25%的抗性 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.9" disabledeltatime="true">
+          <Affliction identifier="EKR_pneumothorax_resistance_075" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_dislocation_resistance_025" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+      </Wearable>
+      <!-- 和戰鬥潛水服一致，必須升到MK-II才能自動注射 -->
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="tank">
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+        <Containable items="weldingtoolfuel" excludeditems="oxygenitetank" />
+        <Containable items="oxygensource" excludeditems="oxygenitetank">
+          <StatusEffect type="OnWearing" target="Contained">
+            <RequiredItem items="oxygensource" type="Contained" />
+            <Conditional condition="lt 5.0" />
+            <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+          </StatusEffect>
+        </Containable>
+        <Containable items="oxygenitetank">
+          <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.3" setvalue="true" targetslot="0">
+            <Conditional IsDead="false" />
+          </StatusEffect>
+        </Containable>
+        <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+          <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+          <Conditional condition="lte 0.0" />
+          <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+        </StatusEffect>
+      </ItemContainer>
+    </Item>
+    <!-- Mk-I軍用動力裝甲（傭兵塗裝） -->
+    <Item name="" identifier="ek_armored_hardsuit_paintmercenary" subcategory="ekr_armory_individual_weapon" aliases="military_hardsuit,armored hardsuit,armored_hardsuit" category="Equipment,Diving" tags="diving,deepdiving,human,divingsuit,light,ek_armored_hardsuit,disallowduplicatedeconstructoutput" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="4">
+      <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
+      <Price baseprice="2915" sold="false" />
+      <!-- Paint Variants -->
+      <Fabricate suitablefabricators="fabricator" requiredtime="4">
+        <RequiredItem identifier="ek_armored_hardsuit" />
+        <RequiredItem identifier="greenpaint" />
+      </Fabricate>
+      <Deconstruct time="5">
+        <Item identifier="ek_armored_hardsuit" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" sourcerect="384,448,64,64" />
+      <Sprite name="Diving Suit Item" texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary_item.png" sourcerect="2,0,124,128" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary_inlocker.png" sourcerect="12,30,77,209" depth="0.55" origin="-0.12,-0.13" />
+      <ContainedSprite name="Diving Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary_item.png" sourcerect="6,134,248,59" depth="0.55" origin="0.58,0.5" />
+      <Body radius="45" width="34" density="30" />
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.10,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+        <TickBox text="ekr.suitlights" IsOn="true">
+          <StatusEffect type="OnUse" target="This" IsOn="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+        </TickBox>
+      </CustomInterface>
+      <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpUse" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" canbeselected="false" canbepicked="true" pickkey="Use" allowswappingwhenpicked="false" />
+      <!-- 引怪範圍 -->
+      <aitarget maxsightrange="1500" />
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="Head" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inheritorigin="false" inherittexturescale="false" sourcerect="304,16,96,96" origin="0.5,0.5" scale="0.4">
+          <!-- 燈光，頭燈 -->
+          <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/lightcone.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="Torso" inheritlimbdepth="true" hidelimb="true" hideotherwearables="false" inherittexturescale="false" inheritorigin="false" sourcerect="0,0,128,256" scale="0.4">
+          <!-- 另一個燈光...這是胸口的燈???? -->
+          <LightComponent range="400.0" lightcolor="250,224,165,40" powerconsumption="10" IsOn="true" allowingameediting="false" canbeselected="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/pointlight_bright.png" origin="0.5, 0.56" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="Waist" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.44,0.71" sourcerect="0,416,96,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="RightForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="192,16,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="LeftForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="192,144,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="RightHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="LeftHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="RightArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="128,0,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="LeftArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="128,128,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="RightThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="80,256,96,160" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="LeftThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="176,256,96,160" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="RightLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="96,416,80,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="LeftLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="176,416,80,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="RightFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_paintmercenary.png" limb="LeftFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <!-- 穿戴時缺氧，必須有氧氣罐 -->
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" UseHullOxygen="false" />
+        <!-- 穿戴時的移動速度等效果以及音效 -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" PressureProtection="6000.0" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true">
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" loop="true" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="250" loop="true" />
+        </StatusEffect>
+        <!-- 當潛水服被容納時補充氧氣。 -->
+        <StatusEffect type="OnContained" target="Contained" Condition="1.0" targetslot="0" interval="1" disabledeltatime="true">
+          <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+          <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1000.0" Condition="-0.3" comparison="Or">
+          <Conditional IsDead="false" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" Condition="-0.5" interval="0.5" disabledeltatime="true">
+          <Conditional IsDead="false" />
+          <RequiredItem items="weldingfueltank" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" Oxygen="-10.0" Condition="-0.5" interval="0.5" disabledeltatime="true">
+          <Conditional IsDead="false" />
+          <RequiredItem items="incendiumfueltank" type="Contained" />
+          <Affliction identifier="burn" amount="3.0" />
+        </StatusEffect>
+        <!-- 防禦屬性 -->
+        <!-- 5%機率免疫傷害 -->
+        <!-- 常見傷害-70% -->
+        <!-- 內傷與內臟損傷-15% -->
+        <!-- 減80流血 -->
+        <!-- 減50燒傷 -->
+        <!-- 減15%暈眩，5%機率免疫暈眩 -->
+        <!-- 免疫輻射傷害 -->
+        <!-- 90%免疫畫皮，感染速度下降10% -->
+        <!-- 麻痺15%減傷15%免疫 -->
+        <!-- 幻覺-60% -->
+        <!-- 免疫腦震盪 -->
+        <!-- 水流抵抗5% -->
+        <!-- 武器射速提升5% -->
+        <!-- 10/29 內傷與內臟損傷抗性各提升5%，麻痺抗性+5%，幻覺抗性+20%，裝備時武器射速提升5% -->
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound,bitewounds" armorsector="0.0,360.0" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage,organdamage,internaldamage" damagemultiplier="0.85" damagesound="LimbArmor" />
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.2" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.50" />
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.85" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.0" damagesound="LimbArmor" />
+        <damagemodifier afflictionidentifiers="huskinfection" armorsector="0.0,360.0" probabilitymultiplier="0.1" damagemultiplier="0.9" damagesound="LimbArmor" />
+        <damagemodifier afflictiontypes="paralysis" armorsector="0.0,360.0" damagemultiplier="0.85" probabilitymultiplier="0.85" damagesound="LimbArmor" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="hallucinating" damagemultiplier="0.4" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="concussion" damagemultiplier="0.0" damagesound="" deflectprojectiles="true" />
+        <StatValue stattype="FlowResistance" value="0.75" />
+        <StatValue stattype="PropulsionSpeed" value="-0.3" />
+        <StatValue stattype="WalkingSpeed" value="-0.5" />
+        <!-- 給予氣胸-75%、骨折-25%的抗性 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.9" disabledeltatime="true">
+          <Affliction identifier="EKR_pneumothorax_resistance_075" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_dislocation_resistance_025" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+      </Wearable>
+      <!-- 和戰鬥潛水服一致，必須升到MK-II才能自動注射 -->
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="tank">
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+        <Containable items="weldingtoolfuel" excludeditems="oxygenitetank" />
+        <Containable items="oxygensource" excludeditems="oxygenitetank">
+          <StatusEffect type="OnWearing" target="Contained">
+            <RequiredItem items="oxygensource" type="Contained" />
+            <Conditional condition="lt 5.0" />
+            <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+          </StatusEffect>
+        </Containable>
+        <Containable items="oxygenitetank">
+          <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.3" setvalue="true" targetslot="0">
+            <Conditional IsDead="false" />
+          </StatusEffect>
+        </Containable>
+        <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+          <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+          <Conditional condition="lte 0.0" />
+          <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+        </StatusEffect>
+      </ItemContainer>
+    </Item>
+    <!-- Mk-II軍用動力裝甲，重作 -->
+    <!-- 1/27，增加爆炸傷害抗性35%  -->
+    <!-- 削弱MK-II的增益，有點離譜了 -->
+    <Item name="" identifier="ek_armored_hardsuit2" subcategory="ekr_armory_individual_weapon" category="Equipment,Diving" tags="diving,deepdiving,divinggear_wearableindoors,human,ek_armored_hardsuit2,disallowduplicatedeconstructoutput" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="5" aliases="military hardsuit mk-ii,military hardsuit mk-2">
+      <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
+      <Price baseprice="5420" sold="false" />
+      <Fabricate suitablefabricators="fabricator" requiredtime="80">
+        <RequiredSkill identifier="weapons" level="80" />
+        <RequiredSkill identifier="mechanical" level="70" />
+        <RequiredItem tag="ek_armored_hardsuit" />
+        <!-- 2805 -->
+        <RequiredItem identifier="pucs" />
+        <!-- 670 -->
+        <RequiredItem identifier="physicorium" amount="4" />
+        <!-- 800 -->
+        <RequiredItem identifier="dementonite" amount="4" />
+        <!-- 800 -->
+        <RequiredItem identifier="fpgacircuit" amount="4" />
+        <!-- 320 -->
+      </Fabricate>
+      <Deconstruct time="45">
+        <Item identifier="ek_armored_hardsuit" />
+        <Item identifier="pucs" />
+        <Item identifier="physicorium" amount="2" />
+        <Item identifier="dementonite" amount="2" />
+        <Item identifier="fpgacircuit" amount="4" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/InventoryIcons.png" sourcerect="128,512,64,64" />
+      <Sprite name="Diving Suit Item" texture="%ModDir%/Items/Jobgear/ek_divinggear.png" sourcerect="130,224,124,128" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_inlocker.png" sourcerect="12,30,77,209" depth="0.55" origin="-0.12,-0.13" />
+      <ContainedSprite name="Diving Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/Jobgear/ek_divinggear.png" sourcerect="134,358,248,59" depth="0.55" origin="0.58,0.5" />
+      <Body radius="45" width="34" density="35" />
+      <!-- 開關燈 -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.10,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+        <TickBox text="ekr.suitlights" IsOn="true">
+          <StatusEffect type="OnUse" target="This" IsOn="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+        </TickBox>
+      </CustomInterface>
+      <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpUse" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" canbeselected="false" canbepicked="true" pickkey="Use" allowswappingwhenpicked="false" />
+      <!-- 引怪範圍 -->
+      <aitarget maxsightrange="1500" />
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="Head" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inheritorigin="false" inherittexturescale="false" sourcerect="296,8,112,120" origin="0.5,0.5" scale="0.4">
+          <!-- 頭燈 -->
+          <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/lightcone.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="Torso" inheritlimbdepth="true" hidelimb="true" hideotherwearables="false" inheritorigin="false" inherittexturescale="false" origin="0.51,0.46" sourcerect="0,0,144,256" scale="0.4">
+          <!-- 胸口燈??? -->
+          <LightComponent range="400.0" lightcolor="250,224,165,40" powerconsumption="10" IsOn="true" allowingameediting="false" canbeselected="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/pointlight_bright.png" origin="0.5, 0.56" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="Waist" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.44,0.71" sourcerect="0,416,96,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="RightForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="208,16,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="LeftForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="208,144,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="RightHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="LeftHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="RightArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="144,0,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="LeftArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="144,128,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="RightThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="96,256,96,152" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="LeftThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,256,96,152" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="RightLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="112,408,80,120" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="LeftLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,408,80,120" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="RightFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2.png" limb="LeftFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <!-- 可以利用空間內的氧氣 -->
+        <StatusEffect type="OnWearing" target="Character" UseHullOxygen="true" ObstructVision="false" PressureProtection="12000.0" LowPassMultiplier="0.75" setvalue="true" disabledeltatime="true">
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" loop="true" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="250" loop="true" />
+        </StatusEffect>
+        <!-- 在潛水服櫃中時自動充氧 -->
+        <StatusEffect type="OnContained" target="Contained" Condition="1.0" targetslot="0" interval="1" disabledeltatime="true">
+          <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+          <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+          <Conditional IsDead="false" />
+          <Conditional HullOxygenPercentage="lt 50" />
+          <Conditional InWater="false" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+          <Conditional InWater="true" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+          <Conditional IsDead="false" />
+          <RequiredItem items="weldingfueltank" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+          <Conditional IsDead="false" />
+          <RequiredItem items="incendiumfueltank" type="Contained" />
+          <Affliction identifier="burn" amount="3.0" />
+        </StatusEffect>
+        <!-- 10/29 內傷與內臟損傷抗性各提升5%，暈眩抗性+5%，麻痺抗性+5%，幻覺免疫，水流抗性+5%，裝備時武器射速提升10% -->
+        <!-- 傷害-5%，5%機率免疫 -->
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" damagemultiplier="0.95" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!--鈍器、撕裂、槍、咬傷-75%-->
+        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound,bitewounds" armorsector="0.0,360.0" damagemultiplier="0.25" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 器官損傷、內臟損傷-35% -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage,organdamage,internaldamage" damagemultiplier="0.65" damagesound="LimbArmor" />
+        <!-- 流血-85% -->
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.15" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 失血-10% -->
+        <damagemodifier afflictiontypes="bloodloss" armorsector="0.0,360.0" damagemultiplier="0.90" />
+        <!-- 燒傷-90% -->
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.1" />
+        <!-- 暈眩-55%，5%機率免疫-->
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.45" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 免疫輻射 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.0" damagesound="LimbArmor" />
+        <!-- 100%免疫畫皮，感染速度下降25% -->
+        <damagemodifier afflictionidentifiers="huskinfection" armorsector="0.0,360.0" probabilitymultiplier="0.0" damagemultiplier="0.75" damagesound="LimbArmor" />
+        <!-- 麻痺-30%，30%機率免疫 -->
+        <damagemodifier afflictiontypes="paralysis" armorsector="0.0,360.0" damagemultiplier="0.70" probabilitymultiplier="0.70" damagesound="LimbArmor" />
+        <!-- 幻覺免疫 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="hallucinating" damagemultiplier="0.0" probabilitymultiplier="0.0" />
+        <!-- 免疫腦震盪 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="concussion" damagemultiplier="0.0" damagesound="" deflectprojectiles="true" />
+        <!-- 水流抵抗90% -->
+        <StatValue stattype="FlowResistance" value="0.9" />
+        <!-- 近戰攻速+10%、射擊精度+25% -->
+        <StatValue stattype="MeleeAttackSpeed" value="0.1" />
+        <StatValue stattype="RangedSpreadReduction" value="0.25" />
+        <StatValue stattype="WalkingSpeed" value="-0.2" />
+        <!-- 可以把生命吊著，並且給予外骨骼效果和部分精神創傷的抗性 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.8" disabledeltatime="true">
+          <ReduceAffliction type="damage" amount="0.05" />
+          <ReduceAffliction type="nausea" amount="0.35" />
+          <Affliction identifier="EKR_LifeSupportSystem" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="recoilstabilized" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_pneumothorax_immunity" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_dislocation_resistance_05" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+        <!-- 沒氧氣的提示 -->
+        <ItemComponent IsActiveConditionalComparison="Or">
+          <IsActive HullOxygenPercentage="lt 50" />
+          <IsActive InWater="eq true" />
+          <StatusEffect type="OnActive" target="Contained,Character" comparison="And">
+            <RequiredItem items="oxygensource" type="Contained" />
+            <Conditional condition="lt 5.0" />
+            <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+          </StatusEffect>
+          <StatusEffect type="OnActive" target="Contained" playsoundonrequireditemfailure="true">
+            <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+            <Conditional condition="lte 0.0" />
+            <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+          </StatusEffect>
+        </ItemComponent>
+      </Wearable>
+      <!-- 自帶健康掃描儀的效果，可以額外添加熱成像 -->
+      <StatusHUD drawhudwhenequipped="true" overlaycolor="0,0,0,0" range="3000" thermalgoggles="false" showdeadcharacters="false" showtexts="true" />
+      <ItemContainer capacity="0" maxstacksize="0" hideitems="true" containedstateindicatorslot="0" containedstateindicatorstyle="tank">
+        <Containable items="none" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+        <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+        <SlotIcon slotindex="2" texture="%ModDir%/Items/Jobgear/ekr_SlotIcon.png" sourcerect="0,0,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="oxygensource,weldingtoolfuel" excludeditems="oxygenitetank" />
+          <Containable items="oxygenitetank">
+            <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.3" setvalue="true" comparison="And" targetslot="0">
+              <Conditional IsDead="false" />
+              <Conditional HullOxygenPercentage="lt 50" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+          <Containable items="weldingfueltank" blameequipperfordeath="true">
+            <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+              <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" Oxygen="-5.0" comparison="And">
+              <Conditional IsDead="false" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+          <Containable items="incendiumfueltank" blameequipperfordeath="true">
+            <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+              <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" comparison="And" targetlimb="Torso">
+              <Affliction identifier="burn" amount="20.0" />
+              <Conditional IsDead="false" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+        <!-- 自動注射 -->
+        <SubContainer capacity="1" maxstacksize="1" autoinject="true">
+          <Containable items="chem,medical" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="thermalgoggles">
+            <StatusEffect type="OnContaining" target="This" targetitemcomponent="StatusHUD" drawhudwhenequipped="true" overlaycolor="0,0,0,0" targetslot="2" showtexts="true" thermalgoggles="false" delay="0.8" stackable="false" />
+            <StatusEffect type="OnContaining" target="This" targetitemcomponent="StatusHUD" drawhudwhenequipped="true" overlaycolor="176,0,0,120" targetslot="2" showtexts="true" thermalgoggles="true" />
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+    <!-- Mk-II軍用動力裝甲（海盜塗裝） -->
+    <Item name="" identifier="ek_armored_hardsuit2_paintbandit" category="Equipment,Diving" tags="diving,deepdiving,divinggear_wearableindoors,human,ek_armored_hardsuit2,disallowduplicatedeconstructoutput" subcategory="ekr_armory_individual_weapon" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="5">
+      <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
+      <Price baseprice="5560" sold="false" />
+      <!-- Paint Variants -->
+      <Fabricate suitablefabricators="fabricator" requiredtime="4">
+        <RequiredItem identifier="ek_armored_hardsuit2" />
+        <RequiredItem identifier="redpaint" />
+      </Fabricate>
+      <Deconstruct time="5">
+        <Item identifier="ek_armored_hardsuit2" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" sourcerect="352,480,64,64" />
+      <Sprite name="Diving Suit Item" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit_item.png" sourcerect="2,0,124,128" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit_inlocker.png" sourcerect="12,30,77,209" depth="0.55" origin="-0.12,-0.13" />
+      <ContainedSprite name="Diving Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit_item.png" sourcerect="6,134,248,59" depth="0.55" origin="0.58,0.5" />
+      <Body radius="45" width="34" density="35" />
+      <!-- 開關燈 -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.10,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+        <TickBox text="ekr.suitlights" IsOn="true">
+          <StatusEffect type="OnUse" target="This" IsOn="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+        </TickBox>
+      </CustomInterface>
+      <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpUse" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" canbeselected="false" canbepicked="true" pickkey="Use" allowswappingwhenpicked="false" />
+      <!-- 引怪範圍 -->
+      <aitarget maxsightrange="1500" />
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="Head" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inheritorigin="false" inherittexturescale="false" sourcerect="296,8,112,120" origin="0.5,0.5" scale="0.4">
+          <!-- 頭燈 -->
+          <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/lightcone.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="Torso" inheritlimbdepth="true" hidelimb="true" hideotherwearables="false" inheritorigin="false" inherittexturescale="false" origin="0.51,0.46" sourcerect="0,0,144,256" scale="0.4">
+          <!-- 胸口燈??? -->
+          <LightComponent range="400.0" lightcolor="250,224,165,40" powerconsumption="10" IsOn="true" allowingameediting="false" canbeselected="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/pointlight_bright.png" origin="0.5, 0.56" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="Waist" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.44,0.71" sourcerect="0,416,96,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="RightForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="208,16,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="LeftForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="208,144,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="RightHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="LeftHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="RightArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="144,0,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="LeftArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="144,128,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="RightThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="96,256,96,152" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="LeftThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,256,96,152" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="RightLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="112,408,80,120" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="LeftLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,408,80,120" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="RightFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintbandit.png" limb="LeftFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <!-- 可以利用空間內的氧氣 -->
+        <StatusEffect type="OnWearing" target="Character" UseHullOxygen="true" ObstructVision="false" PressureProtection="12000.0" LowPassMultiplier="0.75" setvalue="true" disabledeltatime="true">
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" loop="true" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="250" loop="true" />
+        </StatusEffect>
+        <!-- 在潛水服櫃中時自動充氧 -->
+        <StatusEffect type="OnContained" target="Contained" Condition="1.0" targetslot="0" interval="1" disabledeltatime="true">
+          <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+          <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+          <Conditional IsDead="false" />
+          <Conditional HullOxygenPercentage="lt 50" />
+          <Conditional InWater="false" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+          <Conditional InWater="true" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+          <Conditional IsDead="false" />
+          <RequiredItem items="weldingfueltank" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+          <Conditional IsDead="false" />
+          <RequiredItem items="incendiumfueltank" type="Contained" />
+          <Affliction identifier="burn" amount="3.0" />
+        </StatusEffect>
+        <!-- 10/29 內傷與內臟損傷抗性各提升5%，暈眩抗性+5%，麻痺抗性+5%，幻覺免疫，水流抗性+5%，裝備時武器射速提升10% -->
+        <!-- 傷害-5%，5%機率免疫 -->
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" damagemultiplier="0.95" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!--鈍器、撕裂、槍、咬傷-75%-->
+        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound,bitewounds" armorsector="0.0,360.0" damagemultiplier="0.25" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 器官損傷、內臟損傷-35% -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage,organdamage,internaldamage" damagemultiplier="0.65" damagesound="LimbArmor" />
+        <!-- 流血-85% -->
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.15" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 失血-10% -->
+        <damagemodifier afflictiontypes="bloodloss" armorsector="0.0,360.0" damagemultiplier="0.90" />
+        <!-- 燒傷-90% -->
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.1" />
+        <!-- 暈眩-55%，5%機率免疫-->
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.45" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 免疫輻射 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.0" damagesound="LimbArmor" />
+        <!-- 100%免疫畫皮，感染速度下降25% -->
+        <damagemodifier afflictionidentifiers="huskinfection" armorsector="0.0,360.0" probabilitymultiplier="0.0" damagemultiplier="0.75" damagesound="LimbArmor" />
+        <!-- 麻痺-30%，30%機率免疫 -->
+        <damagemodifier afflictiontypes="paralysis" armorsector="0.0,360.0" damagemultiplier="0.70" probabilitymultiplier="0.70" damagesound="LimbArmor" />
+        <!-- 幻覺免疫 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="hallucinating" damagemultiplier="0.0" probabilitymultiplier="0.0" />
+        <!-- 免疫腦震盪 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="concussion" damagemultiplier="0.0" damagesound="" deflectprojectiles="true" />
+        <!-- 水流抵抗90% -->
+        <StatValue stattype="FlowResistance" value="0.9" />
+        <!-- 近戰攻速+10%、射擊精度+25% -->
+        <StatValue stattype="MeleeAttackSpeed" value="0.1" />
+        <StatValue stattype="RangedSpreadReduction" value="0.25" />
+        <StatValue stattype="WalkingSpeed" value="-0.2" />
+        <!-- 可以把生命吊著，並且給予外骨骼效果和部分精神創傷的抗性 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.8" disabledeltatime="true">
+          <ReduceAffliction type="damage" amount="0.05" />
+          <ReduceAffliction type="nausea" amount="0.35" />
+          <Affliction identifier="EKR_LifeSupportSystem" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="recoilstabilized" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_pneumothorax_immunity" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_dislocation_resistance_05" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+        <!-- 沒氧氣的提示 -->
+        <ItemComponent IsActiveConditionalComparison="Or">
+          <IsActive HullOxygenPercentage="lt 50" />
+          <IsActive InWater="eq true" />
+          <StatusEffect type="OnActive" target="Contained,Character" comparison="And">
+            <RequiredItem items="oxygensource" type="Contained" />
+            <Conditional condition="lt 5.0" />
+            <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+          </StatusEffect>
+          <StatusEffect type="OnActive" target="Contained" playsoundonrequireditemfailure="true">
+            <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+            <Conditional condition="lte 0.0" />
+            <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+          </StatusEffect>
+        </ItemComponent>
+      </Wearable>
+      <!-- 自帶健康掃描儀的效果，可以額外添加熱成像 -->
+      <StatusHUD drawhudwhenequipped="true" overlaycolor="0,0,0,0" range="3000" thermalgoggles="false" showdeadcharacters="false" showtexts="true" />
+      <ItemContainer capacity="0" maxstacksize="0" hideitems="true" containedstateindicatorslot="0" containedstateindicatorstyle="tank">
+        <Containable items="none" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+        <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+        <SlotIcon slotindex="2" texture="%ModDir%/Items/Jobgear/ekr_SlotIcon.png" sourcerect="0,0,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="oxygensource,weldingtoolfuel" excludeditems="oxygenitetank" />
+          <Containable items="oxygenitetank">
+            <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.3" setvalue="true" comparison="And" targetslot="0">
+              <Conditional IsDead="false" />
+              <Conditional HullOxygenPercentage="lt 50" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+          <Containable items="weldingfueltank" blameequipperfordeath="true">
+            <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+              <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" Oxygen="-5.0" comparison="And">
+              <Conditional IsDead="false" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+          <Containable items="incendiumfueltank" blameequipperfordeath="true">
+            <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+              <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" comparison="And" targetlimb="Torso">
+              <Affliction identifier="burn" amount="20.0" />
+              <Conditional IsDead="false" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+        <!-- 自動注射 -->
+        <SubContainer capacity="1" maxstacksize="1" autoinject="true">
+          <Containable items="chem,medical" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="thermalgoggles">
+            <StatusEffect type="OnContaining" target="This" targetitemcomponent="StatusHUD" drawhudwhenequipped="true" overlaycolor="0,0,0,0" targetslot="2" showtexts="true" thermalgoggles="false" delay="0.8" stackable="false" />
+            <StatusEffect type="OnContaining" target="This" targetitemcomponent="StatusHUD" drawhudwhenequipped="true" overlaycolor="176,0,0,120" targetslot="2" showtexts="true" thermalgoggles="true" />
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+    <!-- Mk-II軍用動力裝甲（傭兵塗裝） -->
+    <!-- 11/22TAG，增加AI優先級 -->
+    <Item name="" identifier="ek_armored_hardsuit2_paintmercenary" category="Equipment,Diving" tags="diving,deepdiving,divinggear_wearableindoors,human,ek_armored_hardsuit2,disallowduplicatedeconstructoutput" subcategory="ekr_armory_individual_weapon" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" botpriority="5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="">
+      <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
+      <Price baseprice="5510" sold="false" />
+      <!-- Paint Variants -->
+      <Fabricate suitablefabricators="fabricator" requiredtime="4">
+        <RequiredItem identifier="ek_armored_hardsuit2" />
+        <RequiredItem identifier="greenpaint" />
+      </Fabricate>
+      <Deconstruct time="5">
+        <Item identifier="ek_armored_hardsuit2" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" sourcerect="352,480,64,64" />
+      <Sprite name="Diving Suit Item" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary_item.png" sourcerect="2,0,124,128" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary_inlocker.png" sourcerect="12,30,77,209" depth="0.55" origin="-0.12,-0.13" />
+      <ContainedSprite name="Diving Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary_item.png" sourcerect="6,134,248,59" depth="0.55" origin="0.58,0.5" />
+      <Body radius="45" width="34" density="35" />
+      <!-- 開關燈 -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.10,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+        <TickBox text="ekr.suitlights" IsOn="true">
+          <StatusEffect type="OnUse" target="This" IsOn="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+        </TickBox>
+      </CustomInterface>
+      <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpUse" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" canbeselected="false" canbepicked="true" pickkey="Use" allowswappingwhenpicked="false" />
+      <!-- 引怪範圍 -->
+      <aitarget maxsightrange="1500" />
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="Head" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inheritorigin="false" inherittexturescale="false" sourcerect="296,8,112,120" origin="0.5,0.5" scale="0.4">
+          <!-- 頭燈 -->
+          <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/lightcone.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="Torso" inheritlimbdepth="true" hidelimb="true" hideotherwearables="false" inheritorigin="false" inherittexturescale="false" origin="0.51,0.46" sourcerect="0,0,144,256" scale="0.4">
+          <!-- 胸口燈??? -->
+          <LightComponent range="400.0" lightcolor="250,224,165,40" powerconsumption="10" IsOn="true" allowingameediting="false" canbeselected="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/pointlight_bright.png" origin="0.5, 0.56" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="Waist" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.44,0.71" sourcerect="0,416,96,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="RightForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="208,16,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="LeftForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="208,144,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="RightHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="LeftHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="RightArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="144,0,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="LeftArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="144,128,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="RightThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="96,256,96,152" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="LeftThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,256,96,152" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="RightLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="112,408,80,120" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="LeftLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,408,80,120" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="RightFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <sprite texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_paintmercenary.png" limb="LeftFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <!-- 可以利用空間內的氧氣 -->
+        <StatusEffect type="OnWearing" target="Character" UseHullOxygen="true" ObstructVision="false" PressureProtection="12000.0" LowPassMultiplier="0.75" setvalue="true" disabledeltatime="true">
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" loop="true" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="250" loop="true" />
+        </StatusEffect>
+        <!-- 在潛水服櫃中時自動充氧 -->
+        <StatusEffect type="OnContained" target="Contained" Condition="1.0" targetslot="0" interval="1" disabledeltatime="true">
+          <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+          <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+          <Conditional IsDead="false" />
+          <Conditional HullOxygenPercentage="lt 50" />
+          <Conditional InWater="false" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+          <Conditional InWater="true" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+          <Conditional IsDead="false" />
+          <RequiredItem items="weldingfueltank" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+          <Conditional IsDead="false" />
+          <RequiredItem items="incendiumfueltank" type="Contained" />
+          <Affliction identifier="burn" amount="3.0" />
+        </StatusEffect>
+        <!-- 10/29 內傷與內臟損傷抗性各提升5%，暈眩抗性+5%，麻痺抗性+5%，幻覺免疫，水流抗性+5%，裝備時武器射速提升10% -->
+        <!-- 傷害-5%，5%機率免疫 -->
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" damagemultiplier="0.95" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!--鈍器、撕裂、槍、咬傷-75%-->
+        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound,bitewounds" armorsector="0.0,360.0" damagemultiplier="0.25" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 器官損傷、內臟損傷-35% -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage,organdamage,internaldamage" damagemultiplier="0.65" damagesound="LimbArmor" />
+        <!-- 流血-85% -->
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.15" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 失血-10% -->
+        <damagemodifier afflictiontypes="bloodloss" armorsector="0.0,360.0" damagemultiplier="0.90" />
+        <!-- 燒傷-90% -->
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.1" />
+        <!-- 暈眩-55%，5%機率免疫-->
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.45" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 免疫輻射 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.0" damagesound="LimbArmor" />
+        <!-- 100%免疫畫皮，感染速度下降25% -->
+        <damagemodifier afflictionidentifiers="huskinfection" armorsector="0.0,360.0" probabilitymultiplier="0.0" damagemultiplier="0.75" damagesound="LimbArmor" />
+        <!-- 麻痺-30%，30%機率免疫 -->
+        <damagemodifier afflictiontypes="paralysis" armorsector="0.0,360.0" damagemultiplier="0.70" probabilitymultiplier="0.70" damagesound="LimbArmor" />
+        <!-- 幻覺免疫 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="hallucinating" damagemultiplier="0.0" probabilitymultiplier="0.0" />
+        <!-- 免疫腦震盪 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="concussion" damagemultiplier="0.0" damagesound="" deflectprojectiles="true" />
+        <!-- 水流抵抗90% -->
+        <StatValue stattype="FlowResistance" value="0.9" />
+        <!-- 近戰攻速+10%、射擊精度+25% -->
+        <StatValue stattype="MeleeAttackSpeed" value="0.1" />
+        <StatValue stattype="RangedSpreadReduction" value="0.25" />
+        <StatValue stattype="WalkingSpeed" value="-0.2" />
+        <!-- 可以把生命吊著，並且給予外骨骼效果和部分精神創傷的抗性 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.8" disabledeltatime="true">
+          <ReduceAffliction type="damage" amount="0.05" />
+          <ReduceAffliction type="nausea" amount="0.35" />
+          <Affliction identifier="EKR_LifeSupportSystem" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="recoilstabilized" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_pneumothorax_immunity" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_dislocation_resistance_05" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+        <!-- 沒氧氣的提示 -->
+        <ItemComponent IsActiveConditionalComparison="Or">
+          <IsActive HullOxygenPercentage="lt 50" />
+          <IsActive InWater="eq true" />
+          <StatusEffect type="OnActive" target="Contained,Character" comparison="And">
+            <RequiredItem items="oxygensource" type="Contained" />
+            <Conditional condition="lt 5.0" />
+            <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+          </StatusEffect>
+          <StatusEffect type="OnActive" target="Contained" playsoundonrequireditemfailure="true">
+            <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+            <Conditional condition="lte 0.0" />
+            <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+          </StatusEffect>
+        </ItemComponent>
+      </Wearable>
+      <!-- 自帶健康掃描儀的效果，可以額外添加熱成像 -->
+      <StatusHUD drawhudwhenequipped="true" overlaycolor="0,0,0,0" range="3000" thermalgoggles="false" showdeadcharacters="false" showtexts="true" />
+      <ItemContainer capacity="0" maxstacksize="0" hideitems="true" containedstateindicatorslot="0" containedstateindicatorstyle="tank">
+        <Containable items="none" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+        <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+        <SlotIcon slotindex="2" texture="%ModDir%/Items/Jobgear/ekr_SlotIcon.png" sourcerect="0,0,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="oxygensource,weldingtoolfuel" excludeditems="oxygenitetank" />
+          <Containable items="oxygenitetank">
+            <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.3" setvalue="true" comparison="And" targetslot="0">
+              <Conditional IsDead="false" />
+              <Conditional HullOxygenPercentage="lt 50" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+          <Containable items="weldingfueltank" blameequipperfordeath="true">
+            <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+              <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" Oxygen="-5.0" comparison="And">
+              <Conditional IsDead="false" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+          <Containable items="incendiumfueltank" blameequipperfordeath="true">
+            <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+              <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" comparison="And" targetlimb="Torso">
+              <Affliction identifier="burn" amount="20.0" />
+              <Conditional IsDead="false" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+        <!-- 自動注射 -->
+        <SubContainer capacity="1" maxstacksize="1" autoinject="true">
+          <Containable items="chem,medical" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="thermalgoggles">
+            <StatusEffect type="OnContaining" target="This" targetitemcomponent="StatusHUD" drawhudwhenequipped="true" overlaycolor="0,0,0,0" targetslot="2" showtexts="true" thermalgoggles="false" delay="0.8" stackable="false" />
+            <StatusEffect type="OnContaining" target="This" targetitemcomponent="StatusHUD" drawhudwhenequipped="true" overlaycolor="176,0,0,120" targetslot="2" showtexts="true" thermalgoggles="true" />
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+    <!-- Mk-I Shearclaw裝甲 -->
+    <!-- 降低購買所需難度等級 -->
+    <!-- 沒有引怪的TAG -->
+    <!-- 之後再想想如何增加這東西的販賣 -->
+    <!-- 3/22，需要兩個都穿才可以免疫水壓，增加水壓抗性，深度上限增加到6000m -->
+    <!-- 增加水下游泳速度 -->
+    <Item name="" identifier="ek_shearclaw_outfit" category="Equipment,Diving" tags="smallitem,diving" fireproof="true" subcategory="ekr_armory_individual_weapon" cargocontaineridentifier="metalcrate" hideinmenus="false" HideConditionBar="true" scale="0.5" impactsoundtag="impact_soft">
+      <PreferredContainer primary="secarmcab" spawnprobability="0.0" />
+      <PreferredContainer secondary="armcab" spawnprobability="0.0" />
+      <Price baseprice="1400" minleveldifficulty="30">
+        <Price storeidentifier="merchantoutpost" multiplier="0.8" sold="false" />
+        <Price storeidentifier="merchantcity" multiplier="0.9" sold="false" />
+        <Price storeidentifier="merchantresearch" multiplier="1" minavailable="0" maxavailable="1" sold="true">
+          <Reputation faction="coalition" min="90" />
+        </Price>
+        <Price storeidentifier="merchantmine" multiplier="1.25" sold="false" />
+        <Price storeidentifier="merchantmilitary" minavailable="0" maxavailable="1" sold="true">
+          <Reputation faction="coalition" min="90" />
+        </Price>
+        <Price storeidentifier="merchantarmory" minavailable="0" maxavailable="1" sold="true">
+          <Reputation faction="coalition" min="90" />
+        </Price>
+      </Price>
+      <Deconstruct time="40">
+        <Item identifier="ballisticfiber" />
+        <Item identifier="organicfiber" />
+        <Item identifier="titaniumaluminiumalloy" />
+        <Item identifier="elastin" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/InventoryIcons.png" sourcerect="128,448,64,64" />
+      <Sprite texture="ek_armor_clothes.png" sourcerect="0,288,224,96" depth="0.6" origin="0.5,0.5" />
+      <Body width="100" height="60" density="30" />
+      <Wearable slots="Any,OuterClothes" msg="ItemMsgPickUpSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="Torso" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.54,0.56" sourcerect="16,0,128,240" scale="0.37" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="Waist" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.6,0.3" sourcerect="16,480,96,112" scale="0.35" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="RightForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="320,32,64,112" scale="0.35" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="LeftForearm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="320,176,64,112" scale="0.35" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="RightArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,16,64,128" scale="0.35" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="LeftArm" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,176,64,128" scale="0.35" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="RightHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.35" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="LeftHand" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.35" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="RightThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.55,0.5" sourcerect="144,336,96,160" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="LeftThigh" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.55,0.5" sourcerect="272,336,96,160" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="RightLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.5" sourcerect="160,528,80,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="LeftLeg" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.45,0.5" sourcerect="272,528,80,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="RightFoot" sound="footstep_metal" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.25,0.3" sourcerect="16,288,80,176" scale="0.4" rotation="90" />
+        <sprite texture="%ModDir%/Items/Jobgear/shearclaw_armor.png" limb="LeftFoot" sound="footstep_metal" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" origin="0.25,0.3" sourcerect="16,288,80,176" scale="0.4" rotation="90" />
+        <!-- 試試直接給壓力保護和速度補正...不對，這是外衣，本來就可以??? -->
+        <StatusEffect type="OnWearing" target="Character" UseHullOxygen="true" ObstructVision="false" PressureProtection="6000.0" setvalue="true" disabledeltatime="true" comparison="And">
+          <Conditional EKR_shearclaw_outfit_Buff="gt 0" />
+          <Conditional EKR_shearclaw_helmet_Buff="gt 0" />
+        </StatusEffect>
+        <!--常見傷害50%減傷-->
+        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound,bitewounds" armorsector="0.0,360.0" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 器官損傷-10% -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="organdamage" damagemultiplier="0.9" damagesound="LimbArmor" />
+        <!-- 減45流血 -->
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.55" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 減75燒傷 -->
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.75" />
+        <!-- 75%免疫畫皮，感染速度下降10% -->
+        <damagemodifier afflictionidentifiers="huskinfection" armorsector="0.0,360.0" probabilitymultiplier="0.25" damagemultiplier="0.9" damagesound="LimbArmor" />
+        <damagemodifier afflictiontypes="paralysis" armorsector="0.0,360.0" damagemultiplier="0.75" probabilitymultiplier="0.9" damagesound="LimbArmor" />
+        <damagemodifier afflictionidentifiers="hallucinating" armorsector="0.0,360.0" damagemultiplier="0.8" />
+        <!-- 大幅降低移動速度，但增加水下推進時的速度，且大幅度減少水流的影響 -->
+        <StatValue stattype="PropulsionSpeed" value="0.5" />
+        <StatValue stattype="SwimmingSpeed" value="0.5" />
+        <StatValue stattype="FlowResistance" value="0.5" />
+        <StatValue stattype="WalkingSpeed" value="-0.5" />
+        <!-- 給予氣胸-75%、骨折-25%的抗性 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.9" disabledeltatime="true">
+          <Affliction identifier="EKR_shearclaw_outfit_Buff" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_pneumothorax_resistance_075" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_dislocation_resistance_025" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+      </Wearable>
+    </Item>
+    <!-- Mk-I Shearclaw頭盔 -->
+    <!-- 沒有引怪的TAG -->
+    <Item name="" identifier="ek_shearclaw_helmet" scale="0.5" category="Equipment,Diving" Tags="smallitem,diving" subcategory="ekr_armory_individual_weapon" cargocontaineridentifier="metalcrate" hideinmenus="false" impactsoundtag="impact_metal_light">
+      <PreferredContainer primary="secarmcab" spawnprobability="0.0" />
+      <PreferredContainer secondary="armcab" spawnprobability="0.0" />
+      <Price baseprice="625" minleveldifficulty="30">
+        <Price storeidentifier="merchantoutpost" multiplier="0.8" sold="false" />
+        <Price storeidentifier="merchantcity" multiplier="0.9" sold="false" />
+        <Price storeidentifier="merchantresearch" multiplier="1" minavailable="0" maxavailable="1" sold="true">
+          <Reputation faction="coalition" min="90" />
+        </Price>
+        <Price storeidentifier="merchantmine" multiplier="1.25" sold="false" />
+        <Price storeidentifier="merchantmilitary" minavailable="0" maxavailable="1" sold="true">
+          <Reputation faction="coalition" min="90" />
+        </Price>
+        <Price storeidentifier="merchantarmory" minavailable="0" maxavailable="1" sold="true">
+          <Reputation faction="coalition" min="90" />
+        </Price>
+      </Price>
+      <Deconstruct time="10">
+        <Item identifier="organicfiber" />
+        <Item identifier="plastic" />
+        <Item identifier="elastin" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/InventoryIcons.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+      <Sprite name="Diving Helmet" texture="%ModDir%/Items/Jobgear/armor_helmets.png" depth="0.55" sourcerect="96,88,96,88" origin="0.5,0.5" />
+      <!-- 燈開關 -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.10,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+        <TickBox text="ekr.helmetlights" IsOn="true">
+          <StatusEffect type="OnUse" target="This" IsOn="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+        </TickBox>
+      </CustomInterface>
+      <Body width="40" height="40" density="15" />
+      <Wearable limbtype="Head" slots="Any,Head" msg="ItemMsgPickUpSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/armor_helmets.png" limb="Head" inheritlimbdepth="true" hidelimb="true" hideotherwearables="true" inherittexturescale="false" inheritorigin="false" sourcerect="96,88,96,88" origin="0.55,0.55" scale="0.37">
+          <LightComponent canbeselected="false" AllowInGameEditing="false" range="200.0" lightcolor="200,255,95,150" powerconsumption="10" IsOn="true">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/shearclaw_helmet_light2.png" origin="0.1, 0.495" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armor_clothes.png" limb="Torso" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inherittexturescale="false" inheritorigin="false" sourcerect="0,0,1,1">
+          <!-- 燈 -->
+          <LightComponent canbeselected="false" AllowInGameEditing="false" range="400.0" lightcolor="200,255,95,40" powerconsumption="10" IsOn="true">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/pointlight_bright.png" origin="0.5, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <!-- 1%機率免疫傷害 -->
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" probabilitymultiplier="0.99" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictionidentifiers="lacerations,gunshotwound,bitewounds, blunttrauma" armorsector="0.0,360.0" damagemultiplier="0.65" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.75" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier afflictionidentifiers="huskinfection,paralysis" armorsector="0.0,360.0" probabilitymultiplier="0.9" damagesound="LimbArmor" />
+        <damagemodifier afflictionidentifiers="hallucinating" armorsector="0.0,360.0" damagemultiplier="0.4" />
+        <damagemodifier afflictionidentifiers="concussion" armorsector="0.0,360.0" damagemultiplier="0.0" damagesound="" deflectprojectiles="true" />
+        <StatusEffect type="OnWearing" target="Character" HideFace="true" LowPassMultiplier="0.5" setvalue="true" disabledeltatime="true" />
+        <!-- 當室內氧氣小於50%時開始使用氧氣 -->
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.4" comparison="And" targetslot="0">
+          <Conditional IsDead="false" />
+          <Conditional HullOxygenPercentage="lt 50" />
+          <Conditional InWater="false" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <!-- 當在水中時開始使用氧氣 -->
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.4" comparison="And" targetslot="0">
+          <Conditional InWater="true" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <!-- 吸焊接油罐 -->
+        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="-100.0" Oxygen="-5.0" Condition="-5.0" interval="1" disabledeltatime="true" targetslot="0">
+          <Conditional IsDead="false" />
+          <RequiredItem items="weldingfueltank" type="Contained" />
+        </StatusEffect>
+        <!-- 吸燃素油罐 -->
+        <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" OxygenAvailable="-100.0" Oxygen="-7.0" Condition="-5.0" interval="1" disabledeltatime="true" targetslot="0">
+          <Conditional IsDead="false" />
+          <RequiredItem items="incendiumfueltank" type="Contained" />
+          <Affliction identifier="burn" amount="3.0" />
+        </StatusEffect>
+        <StatValue stattype="FlowResistance" value="0.1" />
+        <!-- 判定用 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.9" disabledeltatime="true">
+          <Affliction identifier="EKR_shearclaw_helmet_Buff" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+      </Wearable>
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="tank">
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+        <Containable items="weldingtoolfuel" excludeditems="oxygenitetank" />
+        <Containable items="oxygensource" excludeditems="oxygenitetank">
+          <StatusEffect type="OnWearing" target="Contained">
+            <RequiredItem items="oxygensource" type="Contained" />
+            <Conditional condition="lt 5.0" />
+            <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+          </StatusEffect>
+        </Containable>
+        <Containable items="oxygenitetank">
+          <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.25" setvalue="true" targetslot="0">
+            <Conditional IsDead="false" />
+          </StatusEffect>
+        </Containable>
+        <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+          <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+          <Conditional condition="lte 0.0" />
+          <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+        </StatusEffect>
+      </ItemContainer>
+    </Item>
+    <!-- Mk-II軍用動力裝甲（隱形塗裝） -->
+    <!-- 11/9更新，氧氣消耗量減半 -->
+    <!-- 11/22，取消移動速度較快的設定 -->
+    <!-- 2/11改為用8個係合成 -->
+    <!-- 3/5，材料改為用碳和矽合成(因為方便使用IO箱子合成)，改為只能用沒塗裝的來合成 -->
+    <Item name="Mk-II軍用動力裝甲（隱形）" identifier="ek_armored_hardsuit2_invisible" category="Equipment,Diving" tags="diving,deepdiving,divinggear_wearableindoors,human,ek_armored_hardsuit2,disallowduplicatedeconstructoutput" subcategory="ekr_armory_individual_weapon" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" botpriority="5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="">
+      <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
+      <Price baseprice="5528" sold="false" />
+      <!-- Paint Variants -->
+      <Fabricate suitablefabricators="fabricator" requiredtime="4">
+        <RequiredItem identifier="ek_armored_hardsuit2" />
+        <RequiredItem identifier="carbon" amount="4" />
+        <RequiredItem identifier="silicon" amount="4" />
+      </Fabricate>
+      <Deconstruct time="5">
+        <Item identifier="ek_armored_hardsuit2" />
+        <Item identifier="carbon" amount="2" />
+        <Item identifier="silicon" amount="2" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" sourcerect="352,480,64,64" />
+      <Sprite name="Diving Suit Item" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_invisible_item.png" sourcerect="2,0,124,128" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_invisible_inlocker.png" sourcerect="12,30,77,209" depth="0.55" origin="-0.12,-0.13" />
+      <ContainedSprite name="Diving Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/Jobgear/armored_diving_suit_mk2_invisible_item.png" sourcerect="6,134,248,59" depth="0.55" origin="0.58,0.5" />
+      <Body radius="45" width="34" density="35" />
+      <!-- 開關燈 -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.10,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+        <TickBox text="ekr.suitlights" IsOn="true">
+          <StatusEffect type="OnUse" target="This" IsOn="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+        </TickBox>
+      </CustomInterface>
+      <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpUse" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" canbeselected="false" canbepicked="true" pickkey="Use" allowswappingwhenpicked="false" />
+      <!-- 引怪範圍 -->
+      <aitarget maxsightrange="1500" />
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect">
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="Head" inheritlimbdepth="true" inheritscale="true" hidelimb="false" hideotherwearables="false" ignorelimbscale="true" sourcerect="296,8,112,120" origin="0.5,0.5" scale="0.4">
+          <!-- 頭燈 -->
+          <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/lightcone.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="Torso" inheritscale="true" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="false" inherittexturescale="false" origin="0.51,0.46" sourcerect="0,0,144,256" scale="0.4">
+          <!-- 胸口燈??? -->
+          <LightComponent range="400.0" lightcolor="250,224,165,40" powerconsumption="10" IsOn="true" allowingameediting="false" canbeselected="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="%ModDir%/Lights/pointlight_bright.png" origin="0.5, 0.56" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="Waist" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.44,0.71" sourcerect="0,416,96,112" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="RightForearm" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="208,16,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="LeftForearm" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.35" sourcerect="208,144,64,112" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="RightHand" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="LeftHand" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="0,0,1,1" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="RightArm" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="144,0,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="LeftArm" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.45" sourcerect="144,128,64,128" scale="0.43" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="RightThigh" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="96,256,96,152" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="LeftThigh" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,256,96,152" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="RightLeg" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="112,408,80,120" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="LeftLeg" inheritlimbdepth="true" hidelimb="false" hideotherwearables="false" inheritorigin="true" inherittexturescale="false" origin="0.5,0.5" sourcerect="192,408,80,120" scale="0.4" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="RightFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="false" inheritorigin="true" hideotherwearables="false" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <sprite texture="%ModDir%/Items/Jobgear/ek_armored_hardsuit2_invisible.png" limb="LeftFoot" sound="footstep_armor_heavy" inheritlimbdepth="true" hidelimb="false" inheritorigin="true" hideotherwearables="false" inherittexturescale="false" origin="0.45,0.45" sourcerect="0,256,80,112" scale="0.4" rotation="90" />
+        <!-- 可以利用空間內的氧氣 -->
+        <StatusEffect type="OnWearing" target="Character" UseHullOxygen="true" ObstructVision="false" PressureProtection="12000.0" LowPassMultiplier="0.75" setvalue="true" disabledeltatime="true">
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" loop="true" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="250" loop="true" />
+        </StatusEffect>
+        <!-- 在潛水服櫃中時自動充氧 -->
+        <StatusEffect type="OnContained" target="Contained" Condition="1.0" targetslot="0" interval="1" disabledeltatime="true">
+          <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+          <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" comparison="And" targetslot="0">
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <!-- 如果不在水中且船體中沒有足夠的氧氣，則會消耗氧氣 -->
+        <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.3" comparison="And" targetslot="0">
+          <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
+          <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
+          <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="lt 50" />
+          <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
+          <Conditional InWater="false" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <!-- 如果在水中則消耗氧氣 -->
+        <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.3" comparison="And" targetslot="0">
+          <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
+          <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
+          <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
+          <Conditional InWater="true" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <!-- 10/29 內傷與內臟損傷抗性各提升5%，暈眩抗性+5%，麻痺抗性+5%，幻覺免疫，水流抗性+5%，裝備時武器射速提升10% -->
+        <!-- 傷害-5%，5%機率免疫 -->
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" damagemultiplier="0.95" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!--鈍器、撕裂、槍、咬傷-75%-->
+        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound,bitewounds" armorsector="0.0,360.0" damagemultiplier="0.25" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 器官損傷、內臟損傷-35% -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage,organdamage,internaldamage" damagemultiplier="0.65" damagesound="LimbArmor" />
+        <!-- 流血-85% -->
+        <damagemodifier afflictiontypes="bleeding" armorsector="0.0,360.0" damagemultiplier="0.15" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 失血-10% -->
+        <damagemodifier afflictiontypes="bloodloss" armorsector="0.0,360.0" damagemultiplier="0.90" />
+        <!-- 燒傷-90% -->
+        <damagemodifier afflictiontypes="burn" armorsector="0.0,360.0" damagemultiplier="0.1" />
+        <!-- 暈眩-55%，5%機率免疫-->
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.45" probabilitymultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+        <!-- 免疫輻射 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.0" damagesound="LimbArmor" />
+        <!-- 100%免疫畫皮，感染速度下降25% -->
+        <damagemodifier afflictionidentifiers="huskinfection" armorsector="0.0,360.0" probabilitymultiplier="0.0" damagemultiplier="0.75" damagesound="LimbArmor" />
+        <!-- 麻痺-30%，30%機率免疫 -->
+        <damagemodifier afflictiontypes="paralysis" armorsector="0.0,360.0" damagemultiplier="0.70" probabilitymultiplier="0.70" damagesound="LimbArmor" />
+        <!-- 幻覺免疫 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="hallucinating" damagemultiplier="0.0" probabilitymultiplier="0.0" />
+        <!-- 免疫腦震盪 -->
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="concussion" damagemultiplier="0.0" damagesound="" deflectprojectiles="true" />
+        <!-- 水流抵抗90% -->
+        <StatValue stattype="FlowResistance" value="0.9" />
+        <!-- 近戰攻速+10%、射擊精度+25% -->
+        <StatValue stattype="MeleeAttackSpeed" value="0.1" />
+        <StatValue stattype="RangedSpreadReduction" value="0.25" />
+        <StatValue stattype="WalkingSpeed" value="-0.2" />
+        <!-- 可以把生命吊著，並且給予外骨骼效果和部分精神創傷的抗性 -->
+        <StatusEffect type="OnWearing" target="Character" interval="0.8" disabledeltatime="true">
+          <ReduceAffliction type="damage" amount="0.05" />
+          <ReduceAffliction type="nausea" amount="0.35" />
+          <Affliction identifier="EKR_LifeSupportSystem" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="recoilstabilized" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_pneumothorax_immunity" amount="1" multiplybymaxvitality="true" />
+          <Affliction identifier="EKR_dislocation_resistance_05" amount="1" multiplybymaxvitality="true" />
+        </StatusEffect>
+        <!-- 沒氧氣的提示 -->
+        <ItemComponent IsActiveConditionalComparison="Or">
+          <IsActive HullOxygenPercentage="lt 50" />
+          <IsActive InWater="eq true" />
+          <StatusEffect type="OnActive" target="Contained,Character" comparison="And">
+            <RequiredItem items="oxygensource" type="Contained" />
+            <Conditional condition="lt 5.0" />
+            <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+          </StatusEffect>
+          <StatusEffect type="OnActive" target="Contained" playsoundonrequireditemfailure="true">
+            <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+            <Conditional condition="lte 0.0" />
+            <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+          </StatusEffect>
+        </ItemComponent>
+      </Wearable>
+      <!-- 自帶健康掃描儀的效果，可以額外添加熱成像 -->
+      <StatusHUD drawhudwhenequipped="true" overlaycolor="0,0,0,0" range="3000" thermalgoggles="false" showdeadcharacters="false" showtexts="true" />
+      <ItemContainer capacity="0" maxstacksize="0" hideitems="true" containedstateindicatorslot="0" containedstateindicatorstyle="tank">
+        <Containable items="none" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+        <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+        <SlotIcon slotindex="2" texture="%ModDir%/Items/Jobgear/ekr_SlotIcon.png" sourcerect="0,0,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="oxygensource,weldingtoolfuel" excludeditems="oxygenitetank" />
+          <Containable items="oxygenitetank">
+            <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.3" setvalue="true" comparison="And" targetslot="0">
+              <Conditional IsDead="false" />
+              <Conditional HullOxygenPercentage="lt 50" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+          <Containable items="weldingfueltank" blameequipperfordeath="true">
+            <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+              <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" Oxygen="-5.0" comparison="And">
+              <Conditional IsDead="false" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+          <Containable items="incendiumfueltank" blameequipperfordeath="true">
+            <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+              <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+              <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" comparison="And" targetlimb="Torso">
+              <Affliction identifier="burn" amount="20.0" />
+              <Conditional IsDead="false" />
+              <Conditional DecreasedOxygenConsumption="lt 99" />
+              <Conditional NeedsAir="true" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+        <!-- 自動注射 -->
+        <SubContainer capacity="1" maxstacksize="1" autoinject="true">
+          <Containable items="chem,medical" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="thermalgoggles">
+            <StatusEffect type="OnContaining" target="This" targetitemcomponent="StatusHUD" drawhudwhenequipped="true" overlaycolor="0,0,0,0" targetslot="2" showtexts="true" thermalgoggles="false" delay="0.8" stackable="false" />
+            <StatusEffect type="OnContaining" target="This" targetitemcomponent="StatusHUD" drawhudwhenequipped="true" overlaycolor="176,0,0,120" targetslot="2" showtexts="true" thermalgoggles="true" />
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+  </Override>
+</Items>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Afflictions>
+  <Override>
+    <!-- 新版電擊效果 -->
+    <Affliction name="電擊麻痺" identifier="EKR_ElectricParalysis" type="stun" limbspecific="false" indicatorlimb="Torso" showiconthreshold="10" showinhealthscannerthreshold="10" karmachangeonapplied="0" maxstrength="100" WeaponsSkillGain="1.0" iconcolors="195,195,140,255;220,220,100,255;255,255,40,255">
+      <!-- Used incrementally -> apply a set amount of affliction per hit until value > 90, then wear off gradually. -->
+      <!-- Value above 90 equals stun. Each point over 90 equals one second of stun. -->
+      <!-- For example, 95 causes 5 seconds of stun, then target starts recovering. -->
+      <Effect minstrength="0" maxstrength="90" minscreenblur="0" maxscreenblur="0.2" minscreendistort="0.0" maxscreendistort="0.2" minradialdistort="0" maxradialdistort="0.1" strengthchange="-5" minspeedmultiplier="1.0" maxspeedmultiplier="0.3"></Effect>
+      <PeriodicEffect minstrength="40" maxstrength="90" mininterval="0.12" maxinterval="0.15">
+        <StatusEffect target="Character" duration="0.1">
+          <TriggerAnimation Type="Walk" filename="Spasm" priority="10" ExpectedSpecies="Human" />
+          <TriggerAnimation Type="Run" filename="SpasmRun" priority="10" ExpectedSpecies="Human" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <Effect minstrength="90" maxstrength="100" minscreendistort="0.6" maxscreendistort="1" minscreenblur="1" maxscreenblur="1" minradialdistort="0.2" maxradialdistort="1" strengthchange="-10">
+        <!-- 改為直接給暈眩，而非設定，質量300~60給予2點暈眩，質量60~0給予6點暈眩(因為會疊加) -->
+        <StatusEffect target="Character">
+          <Conditional mass="lt 300" />
+          <Affliction identifier="stun" strength="2.0" />
+        </StatusEffect>
+        <StatusEffect target="Character">
+          <Conditional mass="lte 60" />
+          <Affliction identifier="stun" strength="4.0" />
+        </StatusEffect>
+        <StatusEffect target="Character" setvalue="true">
+          <Conditional mass="lt 300" />
+          <ReduceAffliction identifier="EKR_ElectricParalysis" strength="75" />
+          <Affliction identifier="EKR_electricshockwearoff" amount="4" />
+        </StatusEffect>
+        <StatusEffect target="Character" setvalue="true">
+          <!-- Scale the stun with the mass of the character/creature hit. -->
+          <Conditional mass="lt 60" />
+          <Affliction identifier="stun" amount="6" />
+          <Affliction identifier="EKR_electricshockwearoff" amount="6" />
+        </StatusEffect>
+      </Effect>
+      <icon texture="Content/UI/CommandUIBackground.png" sourcerect="770,768,128,128" color="255,255,0,255" origin="0,0" />
+    </Affliction>
+    <!-- 新版電擊，不會造成噁心 -->
+    <Affliction name="Woozy" identifier="EKR_electricshockwearoff" limbspecific="false" type="debuff" activationthreshold="0" showiconthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000" affectmachines="false" maxstrength="10">
+      <Effect minstrength="0" maxstrength="10" minscreendistort="0.0" maxscreendistort="0.2" minscreenblur="0.0" maxscreenblur="0.2" strengthchange="-1.0">
+        <StatusEffect target="Character">
+          <Affliction identifier="slow" amount="20" />
+        </StatusEffect>
+      </Effect>
+      <icon texture="Content/UI/MainIconsAtlas.png" sourcerect="256,640,128,128" color="150,26,26,255" origin="0,0" />
+    </Affliction>
+  </Override>
+</Afflictions>

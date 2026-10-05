@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <Override>
+    <!--氚，中子轟擊鋰，增加鋰的消耗合成後item數2變1，產出的材料取整，合成後剩下燃料棒，1個價值大約等同以前的0.5個-->
+    <!-- 8/6 增加販賣 -->
+    <Item name="" identifier="ek_weapontritium" category="Material" tags="smallitem,ek_fabricator_parts" subcategory="ekr_armory_r" cargocontaineridentifier="metalcrate" scale="0.5" pickdistance="150" impactsoundtag="impact_metal_light" maxstacksize="32">
+      <PreferredContainer secondary="wreckstoragecab" amount="1" spawnprobability="0.02" />
+      <Price baseprice="250" sold="false" minleveldifficulty="35">
+        <Price storeidentifier="merchantoutpost" multiplier="0.6" />
+        <Price storeidentifier="merchantcity" multiplier="0.9" />
+        <Price storeidentifier="merchantresearch" multiplier="1.2" sold="true" minavailable="1" maxavailable="2" />
+        <Price storeidentifier="merchantmilitary" multiplier="1.0" minavailable="0" maxavailable="1" />
+        <Price storeidentifier="merchantmine" multiplier="1.0" minavailable="0" maxavailable="1" />
+        <Price storeidentifier="merchantengineering" multiplier="1.25" sold="true" minavailable="1" maxavailable="2" />
+      </Price>
+      <Fabricate suitablefabricators="fabricator" requiredtime="240" outcondition="1.0">
+        <RequiredSkill identifier="medical" level="40" />
+        <RequiredSkill identifier="electrical" level="50" />
+        <RequiredItem identifier="fuelrod" mincondition="0.495" usecondition="true" />
+        <RequiredItem identifier="lithium" />
+        <RequiredItem identifier="lithium" />
+      </Fabricate>
+      <InventoryIcon texture="%ModDir%/Items/Materials/materials_ek.png" sourcerect="0,0,64,64" />
+      <Sprite texture="%ModDir%/Items/Materials/materials_ek.png" depth="0.54" sourcerect="128,0,64,96" />
+      <Body width="50" height="79" density="10" />
+      <!-- 修正手持的姿勢錯誤 -->
+      <Holdable slots="Any,RightHand,LeftHand" handle1="0,0" msg="ItemMsgPickUpSelect" canBeCombined="true" removeOnCombined="true">
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <!-- 高斯線圈組件 -->
+    <Item name="" identifier="ek_gaussparts" category="Material" tags="smallitem,ek_fabricator_parts,crate" subcategory="ekr_armory_r" scale="0.5" pickdistance="150" impactsoundtag="impact_metal_light" maxstacksize="8">
+      <Price baseprice="624" minleveldifficulty="35">
+        <Price storeidentifier="merchantoutpost" multiplier="0.6" sold="false" />
+        <Price storeidentifier="merchantcity" multiplier="0.8" sold="false" />
+        <Price storeidentifier="merchantresearch" multiplier="1" minavailable="0" />
+        <Price storeidentifier="merchantmilitary" multiplier="1.25" sold="false" />
+        <Price storeidentifier="merchantmine" multiplier="1.0" sold="false" />
+        <Price storeidentifier="merchantarmory" multiplier="0.9" minavailable="0" minleveldifficulty="30" />
+      </Price>
+      <Fabricate suitablefabricators="fabricator" requiredtime="120">
+        <RequiredSkill identifier="electrical" level="40" />
+        <RequiredSkill identifier="mechanical" level="25" />
+        <RequiredItem identifier="plastic" />
+        <RequiredItem identifier="plastic" />
+        <RequiredItem identifier="plastic" />
+        <RequiredItem identifier="plastic" />
+        <RequiredItem identifier="fulgurium" />
+        <RequiredItem identifier="fulgurium" />
+        <RequiredItem identifier="copper" />
+        <RequiredItem identifier="copper" />
+      </Fabricate>
+      <Deconstruct time="10">
+        <Item identifier="plastic" mincondition="1.0" />
+        <Item identifier="plastic" mincondition="0.75" />
+        <Item identifier="plastic" mincondition="0.5" />
+        <Item identifier="plastic" mincondition="0.25" />
+        <Item identifier="fulgurium" mincondition="0.5" />
+        <Item identifier="copper" mincondition="1.0" />
+        <Item identifier="copper" mincondition="0.5" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/Materials/materials_ek.png" sourcerect="64,0,64,64" />
+      <!--<Sprite texture="%ModDir%/Items/Materials/materials_ek.png" depth="0.54" sourcerect="192,0,80,48" />-->
+      <Sprite texture="%ModDir%/Items/Materials/materials_ek.png" depth="0.54" sourcerect="192,64,128,64" />
+      <Body width="120" height="60" density="25" />
+      <Holdable slots="Any,RightHand,LeftHand" holdpos="10,-70" handle1="-2,22" aimable="false" msg="ItemMsgPickUpSelect" canBeCombined="true" removeOnCombined="true">
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <!-- 重寫價格、分解產出 -->
+    <Item name="" identifier="ek_laserparts" category="Material" tags="smallitem,ek_fabricator_parts,crate" subcategory="ekr_armory_r" scale="0.5" pickdistance="150" impactsoundtag="impact_metal_light" maxstacksize="8">
+      <Price baseprice="600" minleveldifficulty="35">
+        <!-- 588+12，湊整 -->
+        <Price storeidentifier="merchantoutpost" multiplier="0.6" sold="false" />
+        <Price storeidentifier="merchantcity" multiplier="0.8" sold="false" />
+        <Price storeidentifier="merchantresearch" multiplier="1" minavailable="2" />
+        <Price storeidentifier="merchantmilitary" multiplier="1" sold="false" />
+        <Price storeidentifier="merchantmine" multiplier="1.0" sold="false" />
+        <Price storeidentifier="merchantengineering" multiplier="0.9" minavailable="0" minleveldifficulty="30" />
+        <Price storeidentifier="merchantarmory" multiplier="0.95" minavailable="0" maxavailable="1" minleveldifficulty="30" />
+      </Price>
+      <Fabricate suitablefabricators="fabricator" requiredtime="120">
+        <RequiredSkill identifier="electrical" level="45" />
+        <RequiredItem identifier="aluminium" />
+        <RequiredItem identifier="aluminium" />
+        <RequiredItem identifier="silicon" />
+        <RequiredItem identifier="silicon" />
+        <RequiredItem identifier="oxygentank" />
+        <RequiredItem identifier="oxygentank" />
+        <RequiredItem identifier="fpgacircuit" />
+        <RequiredItem identifier="fpgacircuit" />
+        <RequiredItem identifier="fpgacircuit" />
+        <RequiredItem identifier="fpgacircuit" />
+      </Fabricate>
+      <Deconstruct time="10">
+        <Item identifier="aluminium" mincondition="0.95" />
+        <Item identifier="aluminium" mincondition="0.5" />
+        <Item identifier="silicon" mincondition="0.95" />
+        <Item identifier="silicon" mincondition="0.5" />
+        <Item identifier="fpgacircuit" mincondition="0.95" />
+        <Item identifier="fpgacircuit" mincondition="0.75" />
+        <Item identifier="fpgacircuit" mincondition="0.5" />
+        <Item identifier="fpgacircuit" mincondition="0.25" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/Materials/materials_ek.png" sourcerect="64,64,64,64" />
+      <Sprite texture="%ModDir%/Items/Materials/materials_ek.png" depth="0.54" sourcerect="192,128,128,64" />
+      <Body width="120" height="60" density="25" />
+      <Holdable slots="Any,RightHand,LeftHand" holdpos="10,-70" handle1="-2,22" aimable="false" msg="ItemMsgPickUpSelect" canBeCombined="true" removeOnCombined="true">
+        <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.7" setvalue="true" />
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <!-- 移到材料類 -->
+    <!-- 武器零件，部分材料增多，一次合一個-->
+    <!-- 8/1取消安全駕駛室的生成 -->
+    <Item name="" identifier="ek_weaponparts" category="Material" maxstacksize="8" subcategory="ekr_armory_r" aliases="weapon_components,weapon parts,weapon_parts" tags="smallitem,ek_fabricator_kit,crate" scale="0.5" pickdistance="150" impactsoundtag="impact_metal_heavy">
+      <PreferredContainer secondary="wreckarmcab" minamount="0" maxamount="1" spawnprobability="0.15" />
+      <PreferredContainer primary="wrecksecarmcab" minamount="0" maxamount="1" spawnprobability="0.1" />
+      <Price baseprice="450" soldeverywhere="false" minleveldifficulty="15">
+        <!-- 355+95 -->
+        <Price storeidentifier="merchantoutpost" multiplier="1.5" sold="false" />
+        <Price storeidentifier="merchantcity" multiplier="1.25" minavailable="1" />
+        <Price storeidentifier="merchantresearch" multiplier="1.25" sold="false" />
+        <Price storeidentifier="merchantmilitary" multiplier="1" minavailable="2" />
+        <Price storeidentifier="merchantmine" multiplier="0.8" sold="false" />
+        <Price storeidentifier="merchantarmory" multiplier="0.9" minavailable="2" />
+      </Price>
+      <Fabricate suitablefabricators="fabricator" requiredtime="40" amount="1">
+        <RequiredSkill identifier="weapons" level="50" />
+        <RequiredItem identifier="steel" amount="2" />
+        <RequiredItem identifier="aluminium" amount="2" />
+        <RequiredItem identifier="titaniumaluminiumalloy" />
+        <RequiredItem identifier="rubber" />
+        <RequiredItem identifier="plastic" />
+      </Fabricate>
+      <Deconstruct time="10">
+        <Item identifier="steel" mincondition="0.5" />
+        <Item identifier="aluminium" mincondition="0.5" />
+        <Item identifier="rubber" mincondition="1.0" />
+        <Item identifier="plastic" mincondition="1.0" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/InventoryIcons.png" sourcerect="256,64,64,64" />
+      <Sprite texture="%ModDir%/Items/Containers/containers_ek.png" depth="0.54" sourcerect="384,240,112,80" />
+      <Body width="112" height="80" density="20" />
+      <Holdable slots="Any,RightHand,LeftHand" holdpos="10,-70" handle1="-5,35" aimable="false" msg="ItemMsgPickUpSelect" canBeCombined="true" removeOnCombined="true">
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <!--裝彈工具，保持使用耐久度的形式，但增加物品疊加上限，可放物品欄，增加材料塑膠-->
+    <Item name="" identifier="ek_loadingkit" category="Material" maxstacksize="8" subcategory="ekr_armory_r" aliases="loading_kit,ammo kit,ammo_kit" tags="smallitem,ek_fabricator_kit,crate" scale="0.5" pickdistance="150" impactsoundtag="impact_metal_heavy">
+      <PreferredContainer primary="secarmcab" minamount="0" maxamount="1" spawnprobability="0.4" />
+      <PreferredContainer secondary="wreckarmcab" minamount="0" maxamount="1" spawnprobability="0.15" />
+      <PreferredContainer primary="wrecksecarmcab" minamount="0" maxamount="1" spawnprobability="0.1" />
+      <Price baseprice="195" soldeverywhere="false" minleveldifficulty="10">
+        <Price storeidentifier="merchantoutpost" multiplier="1.5" sold="false" />
+        <Price storeidentifier="merchantcity" multiplier="1.25" minavailable="2" />
+        <Price storeidentifier="merchantresearch" multiplier="1.25" sold="false" />
+        <Price storeidentifier="merchantmilitary" multiplier="1" minavailable="3" />
+        <Price storeidentifier="merchantmine" multiplier="0.8" sold="false" />
+        <Price storeidentifier="merchantarmory" multiplier="0.9" minavailable="3" />
+      </Price>
+      <!-- 縮短合成時間，武器技能等級 -->
+      <Fabricate suitablefabricators="fabricator" requiredtime="30">
+        <RequiredSkill identifier="weapons" level="50" />
+        <RequiredSkill identifier="mechanical" level="25" />
+        <RequiredItem identifier="steel" />
+        <RequiredItem identifier="aluminium" />
+        <RequiredItem identifier="aluminium" />
+        <RequiredItem identifier="plastic" />
+        <RequiredItem identifier="potassium" />
+      </Fabricate>
+      <Deconstruct time="20">
+        <Item identifier="steel" mincondition="0.95" />
+        <Item identifier="aluminium" mincondition="0.95" />
+        <Item identifier="plastic" mincondition="0.95" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Items/InventoryIcons.png" sourcerect="320,128,64,64" />
+      <Sprite texture="%ModDir%/Items/Containers/containers_ek.png" depth="0.54" sourcerect="384,336,128,80" />
+      <Body width="122" height="80" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" holdpos="10,-70" handle1="-5,35" aimable="false" msg="ItemMsgPickUpSelect" canBeCombined="true" removeOnCombined="true">
+        <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.9" setvalue="true" />
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+</Items>

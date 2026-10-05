@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<prefabs>
+  <ekdockyard_sprinklerdrops LifeTime="3" LifeTimeMin="2" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="0" StartRotationMax="0" RotateToDirection="True" Drag="0" WaterDrag="0.3" VelocityChange="0,-9" VelocityChangeWater="0,-5" CollisionRadius="15" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.5" Restitution="0.2" StartSizeMin="0.6,0.4" StartSizeMax="0.6,0.4" SizeChangeMin="0.3,0.3" SizeChangeMax="0.3,0.3" GrowTime="0.05" StartColor="255,255,255,125" MiddleColor="255,255,255,75" EndColor="255,255,255,0" UseMiddleColor="False" DrawTarget="Air" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,96,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="32,96,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="64,96,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="96,96,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="128,96,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="160,96,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="192,96,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="224,96,32,32" />
+  </ekdockyard_sprinklerdrops>
+  <ekdockyard_flamejet_glow LifeTime="0.3" LifeTimeMin="0.2" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="0" StartRotationMax="0" RotateToDirection="False" Drag="0.05" WaterDrag="0.05" VelocityChange="0,0.25" VelocityChangeWater="0,0.25" CollisionRadius="200" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="False" Friction="0.1" Restitution="0.05" StartSizeMin="1,0.6" StartSizeMax="1,0.6" SizeChangeMin="-0.5,-0.5" SizeChangeMax="0,0" GrowTime="0.03" StartColor="0,50,255,125" MiddleColor="255,200,125,175" EndColor="255,100,50,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="Additive" Priority="-1" AnimDuration="1" LoopAnim="False">
+    <sprite texture="%ModDir%/Particles/baseglow.png" sourcerect="0,0,512,512" origin="0.5,0.5" premultiplyalpha="false" />
+  </ekdockyard_flamejet_glow>
+  <ekdockyard_flamejet_flame LifeTime="0.25" LifeTimeMin="0.2" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="3" StartRotationMax="-3" RotateToDirection="True" Drag="0.2" WaterDrag="0.2" VelocityChange="0,0.5" VelocityChangeWater="0,0.5" CollisionRadius="200" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="False" Friction="0.1" Restitution="0.05" StartSizeMin="1,1" StartSizeMax="1,1" SizeChangeMin="1,3" SizeChangeMax="2,5" GrowTime="0.01" StartColor="50,75,255,255" MiddleColor="255,200,125,125" EndColor="255,100,50,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="Additive" Priority="0" AnimDuration="1" LoopAnim="False">
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_composite1.png" sourcerect="0,0,256,128" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_composite1.png" sourcerect="256,0,256,128" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_composite1.png" sourcerect="0,128,256,128" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_composite1.png" sourcerect="256,128,256,128" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_composite1.png" sourcerect="0,256,256,128" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_composite1.png" sourcerect="256,256,256,128" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_composite1.png" sourcerect="0,384,256,128" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_composite1.png" sourcerect="256,384,256,128" premultiplyalpha="false" origin="0.5,0.5" />
+  </ekdockyard_flamejet_flame>
+  <ekdockyard_flamejet_radial_glow LifeTime="0.3" LifeTimeMin="0.2" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="0" StartRotationMax="0" RotateToDirection="False" Drag="0.05" WaterDrag="0.05" VelocityChange="0,0.25" VelocityChangeWater="0,0.25" CollisionRadius="200" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="False" Friction="0.1" Restitution="0.05" StartSizeMin="1,1" StartSizeMax="1,1" SizeChangeMin="-0.5,-0.5" SizeChangeMax="0,0" GrowTime="0.03" StartColor="0,50,255,125" MiddleColor="255,200,125,175" EndColor="255,100,50,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="Additive" Priority="-1" AnimDuration="1" LoopAnim="False">
+    <sprite texture="%ModDir%/Particles/baseglow.png" sourcerect="0,0,512,512" origin="0.5,0.5" premultiplyalpha="false" />
+  </ekdockyard_flamejet_radial_glow>
+  <ekdockyard_flamejet_radial_flame LifeTime="0.25" LifeTimeMin="0.2" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="360" StartRotationMax="-360" RotateToDirection="True" Drag="0.2" WaterDrag="0.2" VelocityChange="0,0.5" VelocityChangeWater="0,0.5" CollisionRadius="200" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="False" Friction="0.1" Restitution="0.05" StartSizeMin="1,1" StartSizeMax="1,1" SizeChangeMin="1,1" SizeChangeMax="2,2" GrowTime="0.01" StartColor="50,75,255,255" MiddleColor="255,200,125,100" EndColor="255,100,50,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="Additive" Priority="0" AnimDuration="1" LoopAnim="False">
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_break.png" sourcerect="0,0,256,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_break.png" sourcerect="256,0,256,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_break.png" sourcerect="0,256,256,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_break.png" sourcerect="256,256,256,256" premultiplyalpha="false" origin="0.5,0.5" />
+  </ekdockyard_flamejet_radial_flame>
+  <ekdockyard_steamjet_spray LifeTime="0.2" LifeTimeMin="0.15" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="3" StartRotationMax="-3" RotateToDirection="True" Drag="0.2" WaterDrag="0.2" VelocityChange="0,0.5" VelocityChangeWater="0,0.5" CollisionRadius="200" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="False" Friction="0.1" Restitution="0.05" StartSizeMin="1,0.5" StartSizeMax="1,0.5" SizeChangeMin="2,3" SizeChangeMax="4,6" GrowTime="0.01" StartColor="255,255,255,150" MiddleColor="225,225,225,200" EndColor="175,175,175,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="False">
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_flame_transparent.png" sourcerect="0,0,512,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_flame_transparent.png" sourcerect="512,0,512,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_flame_transparent.png" sourcerect="0,256,512,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_flame_transparent.png" sourcerect="512,256,512,256" premultiplyalpha="false" origin="0.5,0.5" />
+  </ekdockyard_steamjet_spray>
+  <ekdockyard_steamjet_radial_spray LifeTime="0.2" LifeTimeMin="0.15" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="360" StartRotationMax="-360" RotateToDirection="True" Drag="0.2" WaterDrag="0.2" VelocityChange="0,0.5" VelocityChangeWater="0,0.5" CollisionRadius="200" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="False" Friction="0.1" Restitution="0.05" StartSizeMin="1,1" StartSizeMax="1,1" SizeChangeMin="3,3" SizeChangeMax="4,4" GrowTime="0.01" StartColor="255,255,255,175" MiddleColor="225,225,225,225" EndColor="175,175,175,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="False">
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_break_transparent.png" sourcerect="0,0,256,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_break_transparent.png" sourcerect="256,0,256,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_break_transparent.png" sourcerect="0,256,256,256" premultiplyalpha="false" origin="0.5,0.5" />
+    <sprite texture="%ModDir%/Particles/ek_muzzleflash_break_transparent.png" sourcerect="256,256,256,256" premultiplyalpha="false" origin="0.5,0.5" />
+  </ekdockyard_steamjet_radial_spray>
+  <ekdockyard_vacuum_small LifeTime="0.7" LifeTimeMin="0" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="0" WaterDrag="0" VelocityChange="0,0" VelocityChangeWater="0,0" CollisionRadius="30" InvariantCollisionSize="False" UseCollision="False" DeleteOnCollision="False" Friction="0.01" Restitution="0.1" StartSizeMin="0.8,0.8" StartSizeMax="1.5,1.5" SizeChangeMin="-1.5,-1.5" SizeChangeMax="-2,-2" GrowTime="0" StartColor="255,255,255,10" MiddleColor="255,255,255,255" EndColor="255,255,153,100" UseMiddleColor="False" DrawTarget="Air" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="384,254,128,128" />
+  </ekdockyard_vacuum_small>
+  <ekdockyard_vacuum_large LifeTime="1" LifeTimeMin="0" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="0" WaterDrag="0" VelocityChange="0,0" VelocityChangeWater="0,0" CollisionRadius="30" InvariantCollisionSize="False" UseCollision="False" DeleteOnCollision="False" Friction="0.01" Restitution="0.1" StartSizeMin="2,2" StartSizeMax="3,3" SizeChangeMin="-2.5,-2.5" SizeChangeMax="-4.5,-4.5" GrowTime="0" StartColor="255,255,255,10" MiddleColor="255,255,255,255" EndColor="255,255,153,100" UseMiddleColor="False" DrawTarget="Air" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="384,254,128,128" />
+  </ekdockyard_vacuum_large>
+  <ekdockyard_shockcoil_arcs LifeTime="0.3" LifeTimeMin="0.15" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="0" WaterDrag="0" VelocityChange="0,0" VelocityChangeWater="0,0" CollisionRadius="10" InvariantCollisionSize="False" UseCollision="False" DeleteOnCollision="False" Friction="0.5" Restitution="0.5" StartSizeMin="0.4,0.4" StartSizeMax="0.6,1" SizeChangeMin="0.2,0" SizeChangeMax="0.2,0" GrowTime="0" StartColor="125,175,255,255" MiddleColor="255,255,255,255" EndColor="100,150,255,0" UseMiddleColor="False" DrawTarget="Both" DrawOnTop="True" DrawAlways="False" BlendState="Additive" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/LightningParticleSheet.png" sourcerect="0,0,256,256" />
+    <sprite texture="Content/Particles/LightningParticleSheet.png" sourcerect="0,256,256,256" />
+    <sprite texture="Content/Particles/LightningParticleSheet.png" sourcerect="256,0,256,256" />
+    <sprite texture="Content/Particles/LightningParticleSheet.png" sourcerect="256,256,256,256" />
+  </ekdockyard_shockcoil_arcs>
+  <ekdockyard_thrusterbubbles_tiny LifeTime="0.5" LifeTimeMin="0" StartDelayMin="0" StartDelayMax="0.1" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="-180" StartRotationMax="180" RotateToDirection="False" Drag="0" WaterDrag="0" VelocityChange="0,0" VelocityChangeWater="0,2" CollisionRadius="0.25" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.5" Restitution="0.5" StartSizeMin="0.3,0.3" StartSizeMax="0.5,0.5" SizeChangeMin="0.1,0.1" SizeChangeMax="0.3,0.3" GrowTime="0.04" StartColor="255,255,255,255" MiddleColor="255,255,255,255" EndColor="255,255,255,0" UseMiddleColor="False" DrawTarget="Water" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="270,5,103,119" />
+  </ekdockyard_thrusterbubbles_tiny>
+  <ekdockyard_thrusterbubbles_small LifeTime="0.75" LifeTimeMin="0" StartDelayMin="0" StartDelayMax="0.1" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="-180" StartRotationMax="180" RotateToDirection="False" Drag="0" WaterDrag="0" VelocityChange="0,0" VelocityChangeWater="0,2" CollisionRadius="0.25" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.5" Restitution="0.5" StartSizeMin="0.5,0.5" StartSizeMax="0.8,0.8" SizeChangeMin="0.1,0.1" SizeChangeMax="0.3,0.3" GrowTime="0.04" StartColor="255,255,255,255" MiddleColor="255,255,255,255" EndColor="255,255,255,0" UseMiddleColor="False" DrawTarget="Water" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="270,5,103,119" />
+  </ekdockyard_thrusterbubbles_small>
+  <ekdockyard_thrusterbubbles_medium LifeTime="1" LifeTimeMin="0" StartDelayMin="0" StartDelayMax="0.1" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="-180" StartRotationMax="180" RotateToDirection="False" Drag="0" WaterDrag="0" VelocityChange="0,0" VelocityChangeWater="0,2" CollisionRadius="0.75" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.5" Restitution="0.5" StartSizeMin="0.6,0.6" StartSizeMax="1,1" SizeChangeMin="0.1,0.1" SizeChangeMax="0.3,0.3" GrowTime="0.04" StartColor="255,255,255,255" MiddleColor="255,255,255,255" EndColor="255,255,255,0" UseMiddleColor="False" DrawTarget="Water" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="270,5,103,119" />
+  </ekdockyard_thrusterbubbles_medium>
+  <!-- Fusion Reactor Meltdown -->
+  <ekdockyard_reactorfusion_meltdownarcs LifeTime="0.3" LifeTimeMin="0.15" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="0" AngularVelocityMax="0" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="0" WaterDrag="0" VelocityChange="0,0" VelocityChangeWater="0,0" CollisionRadius="10" InvariantCollisionSize="False" UseCollision="False" DeleteOnCollision="False" Friction="0.5" Restitution="0.5" StartSizeMin="0.4,0.4" StartSizeMax="0.6,1" SizeChangeMin="0.2,0" SizeChangeMax="0.2,0" GrowTime="0" StartColor="255,200,255,255" MiddleColor="255,255,255,255" EndColor="255,100,75,0" UseMiddleColor="False" DrawTarget="Both" DrawOnTop="True" DrawAlways="False" BlendState="Additive" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/LightningParticleSheet.png" sourcerect="0,0,256,256" />
+    <sprite texture="Content/Particles/LightningParticleSheet.png" sourcerect="0,256,256,256" />
+    <sprite texture="Content/Particles/LightningParticleSheet.png" sourcerect="256,0,256,256" />
+    <sprite texture="Content/Particles/LightningParticleSheet.png" sourcerect="256,256,256,256" />
+  </ekdockyard_reactorfusion_meltdownarcs>
+  <!-- Weather Particles -->
+  <ekdockyard_environmentprecipitation_snow1layer1 LifeTime="7" LifeTimeMin="5" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="-250" AngularVelocityMax="250" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="1" WaterDrag="2" VelocityChange="-2,-10" VelocityChangeWater="0,-2" CollisionRadius="5" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.01" Restitution="0.01" StartSizeMin="0.3,0.3" StartSizeMax="0.6,0.6" SizeChangeMin="-0.1,-0.1" SizeChangeMax="-0.1,-0.1" GrowTime="3" StartColor="255,255,255,25" MiddleColor="255,255,255,255" EndColor="255,255,255,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="32,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="64,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="96,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="128,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="160,64,48,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="208,64,48,32" />
+  </ekdockyard_environmentprecipitation_snow1layer1>
+  <ekdockyard_environmentprecipitation_snow1layer2 LifeTime="9" LifeTimeMin="6" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="-250" AngularVelocityMax="250" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="1" WaterDrag="2" VelocityChange="-1.5,-8" VelocityChangeWater="0,-1.5" CollisionRadius="5" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.01" Restitution="0.01" StartSizeMin="0.3,0.3" StartSizeMax="0.6,0.6" SizeChangeMin="-0.1,-0.1" SizeChangeMax="-0.1,-0.1" GrowTime="4" StartColor="255,255,255,25" MiddleColor="255,255,255,255" EndColor="255,255,255,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="32,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="64,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="96,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="128,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="160,64,48,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="208,64,48,32" />
+  </ekdockyard_environmentprecipitation_snow1layer2>
+  <ekdockyard_environmentprecipitation_snow1layer3 LifeTime="11" LifeTimeMin="7" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="-250" AngularVelocityMax="250" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="1" WaterDrag="2" VelocityChange="-2.5,-6" VelocityChangeWater="0,-1" CollisionRadius="5" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.01" Restitution="0.01" StartSizeMin="0.3,0.3" StartSizeMax="0.6,0.6" SizeChangeMin="-0.1,-0.1" SizeChangeMax="-0.1,-0.1" GrowTime="5" StartColor="255,255,255,25" MiddleColor="255,255,255,255" EndColor="255,255,255,25" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="32,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="64,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="96,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="128,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="160,64,48,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="208,64,48,32" />
+  </ekdockyard_environmentprecipitation_snow1layer3>
+  <ekdockyard_environmentprecipitation_snow2layer1 LifeTime="8" LifeTimeMin="5" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="-250" AngularVelocityMax="250" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="1" WaterDrag="2" VelocityChange="-5,-7" VelocityChangeWater="0,-2" CollisionRadius="5" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.01" Restitution="0.01" StartSizeMin="0.3,0.3" StartSizeMax="0.6,0.6" SizeChangeMin="-0.1,-0.1" SizeChangeMax="-0.1,-0.1" GrowTime="2.5" StartColor="255,255,255,150" MiddleColor="255,255,255,255" EndColor="255,255,255,150" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="32,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="64,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="96,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="128,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="160,64,48,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="208,64,48,32" />
+  </ekdockyard_environmentprecipitation_snow2layer1>
+  <ekdockyard_environmentprecipitation_snow2layer2 LifeTime="8" LifeTimeMin="5" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="-250" AngularVelocityMax="250" StartRotationMin="0" StartRotationMax="360" RotateToDirection="False" Drag="1" WaterDrag="2" VelocityChange="-7,-8" VelocityChangeWater="0,-2" CollisionRadius="5" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.01" Restitution="0.01" StartSizeMin="0.3,0.3" StartSizeMax="0.6,0.6" SizeChangeMin="-0.1,-0.1" SizeChangeMax="-0.1,-0.1" GrowTime="2" StartColor="255,255,255,150" MiddleColor="255,255,255,255" EndColor="255,255,255,150" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="32,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="64,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="96,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="128,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="160,64,48,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="208,64,48,32" />
+  </ekdockyard_environmentprecipitation_snow2layer2>
+  <ekdockyard_environmentprecipitation_snow2layer3 LifeTime="8" LifeTimeMin="5" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="-250" AngularVelocityMax="250" StartRotationMin="0" StartRotationMax="0" RotateToDirection="False" Drag="1" WaterDrag="2" VelocityChange="-6,-5" VelocityChangeWater="0,-2" CollisionRadius="5" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.01" Restitution="0.01" StartSizeMin="0.3,0.3" StartSizeMax="0.6,0.6" SizeChangeMin="-0.1,-0.1" SizeChangeMax="-0.1,-0.1" GrowTime="2.25" StartColor="255,255,255,150" MiddleColor="255,255,255,255" EndColor="255,255,255,150" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="True" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="32,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="64,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="96,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="128,64,32,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="160,64,48,32" />
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="208,64,48,32" />
+  </ekdockyard_environmentprecipitation_snow2layer3>
+  <ekdockyard_environmentprecipitation_rain1layer1 LifeTime="5" LifeTimeMin="3" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="-2" AngularVelocityMax="2" StartRotationMin="0" StartRotationMax="0" RotateToDirection="True" Drag="0.5" WaterDrag="1" VelocityChange="-120,-720" VelocityChangeWater="0,-900" CollisionRadius="5" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.01" Restitution="0.01" StartSizeMin="1.25,0.2" StartSizeMax="1.5,0.4" SizeChangeMin="-0.1,-0.1" SizeChangeMax="-0.1,-0.1" GrowTime="0.2" StartColor="255,255,255,75" MiddleColor="255,255,255,200" EndColor="255,255,255,100" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="130,383,225,40" origin="0.9,0.5" />
+  </ekdockyard_environmentprecipitation_rain1layer1>
+  <ekdockyard_environmentprecipitation_rain1layer2 LifeTime="5" LifeTimeMin="3" StartDelayMin="0" StartDelayMax="0" AngularVelocityMin="-2" AngularVelocityMax="2" StartRotationMin="100" StartRotationMax="100" RotateToDirection="True" Drag="0.4" WaterDrag="1" VelocityChange="-120,-720" VelocityChangeWater="0,-900" CollisionRadius="5" InvariantCollisionSize="False" UseCollision="True" DeleteOnCollision="True" Friction="0.01" Restitution="0.01" StartSizeMin="1.25,0.2" StartSizeMax="1.5,0.4" SizeChangeMin="-0.1,-0.1" SizeChangeMax="-0.1,-0.1" GrowTime="0.2" StartColor="255,255,255,75" MiddleColor="255,255,255,200" EndColor="255,255,255,100" UseMiddleColor="True" DrawTarget="Air" DrawOnTop="False" DrawAlways="False" BlendState="AlphaBlend" Priority="0" AnimDuration="1" LoopAnim="True">
+    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="130,383,225,40" origin="0.9,0.5" />
+  </ekdockyard_environmentprecipitation_rain1layer2>
+</prefabs>

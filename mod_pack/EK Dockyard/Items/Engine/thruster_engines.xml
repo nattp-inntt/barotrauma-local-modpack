@@ -1,0 +1,686 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <!-- 固定式推進器 B 00-5 -->
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedtiny050" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,288,160,144" origin="0.45,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="128,224,96,96" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <!-- 用於消除提示貼圖，優化效能 -->
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_tiny_050" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_tiny_050" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="48,48" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,85" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="0,288,160,144" origin="0.45, 0.4" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,1,1" origin="0.5, 0.5" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+        <!-- Hit detection is weird
+		<Explosion range="80.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" >
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</Explosion>
+		-->
+      </StatusEffect>
+      <!--
+	  <StatusEffect type="OnUse" target="This,NearbyCharacters" range="350">
+        <Affliction identifier="internaldamage" strength="15" />
+        <Affliction identifier="bleeding" strength="30" />
+	  </StatusEffect>
+	  -->
+      <!-- 改用新機制，以讓推進器可以正常的接電池，設計上參考探照燈，但不會有陰影 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="75" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_tiny" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-750" scalemin="1" scalemax="1" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <!-- 推力僅在密度(density)有所不同 -->
+  <Item name="" identifier="ekdockyard_newthrusterforcer_tiny_050" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="2.5" />
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0">
+        <Affliction identifier="drag" strength="0.01" />
+      </Attack>
+    </Projectile>
+  </Item>
+  <!-- 固定式推進器 B 01 -->
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedtiny100" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,288,160,144" origin="0.45,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="128,224,96,96" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_tiny_100" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_tiny_100" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="48,48" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,85" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="0,288,160,144" origin="0.45, 0.4" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,1,1" origin="0.5, 0.5" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+        <!-- Hit detection is weird
+		<Explosion range="80.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" >
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</Explosion>
+		-->
+        <!--
+		<StatusEffect type="OnUse" target="This,NearbyCharacters" range="350">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</StatusEffect>
+		-->
+      </StatusEffect>
+      <!-- 改用新機制，以讓推進器可以正常的接電池，設計上參考探照燈，但不會有陰影 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="150" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_tiny" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-750" scalemin="1" scalemax="1" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="ekdockyard_newthrusterforcer_tiny_100" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="5.25" />
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0">
+        <Affliction identifier="drag" strength="0.01" />
+      </Attack>
+    </Projectile>
+  </Item>
+  <!-- 固定式推進器 C 03 -->
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedsmall300" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="480,0,144,208" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="0,224,128,128" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_small_300" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_small_300" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="64,64" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,125" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="480,0,144,208" origin="0.5, 0.4" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,1,1" origin="0.5, 0.5" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+        <!-- Hit detection is weird
+		<Explosion range="80.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" >
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</Explosion>
+		-->
+        <!--
+		<StatusEffect type="OnUse" target="This,NearbyCharacters" range="350">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</StatusEffect>
+		-->
+      </StatusEffect>
+      <!-- 改用新機制，以讓推進器可以正常的接電池，設計上參考探照燈，但不會有陰影 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="300" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_small" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-750" scalemin="1" scalemax="1" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="ekdockyard_newthrusterforcer_small_300" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="25" />
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0.2">
+        <Affliction identifier="internaldamage" strength="0.2" />
+        <Affliction identifier="lacerations" strength="0.3" />
+        <Affliction identifier="bleeding" strength="0.2" />
+      </Attack>
+      <!--
+	  <StatusEffect type="OnActive" target="This,NearbyCharacters" range="45" condition="-10">
+        <Conditional Condition="gt 96" />
+        <Affliction identifier="internaldamage" strength="2" />
+        <Affliction identifier="lacerations" strength="3" />
+        <Affliction identifier="bleeding" strength="1" />
+	  </StatusEffect>
+	  -->
+    </Projectile>
+  </Item>
+  <!-- 固定式推進器 C 05 -->
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedsmall500" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="480,0,144,208" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="0,224,128,128" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_small_500" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_small_500" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="64,64" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,125" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="480,0,144,208" origin="0.5, 0.4" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,1,1" origin="0.5, 0.5" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+        <!-- Hit detection is weird
+		<Explosion range="80.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" >
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</Explosion>
+		-->
+        <!--
+		<StatusEffect type="OnUse" target="This,NearbyCharacters" range="350">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</StatusEffect>
+		-->
+      </StatusEffect>
+      <!-- 改用新機制，以讓推進器可以正常的接電池，設計上參考探照燈，但不會有陰影 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="500" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_small" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-750" scalemin="1" scalemax="1" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="ekdockyard_newthrusterforcer_small_500" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="25" />
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0.2">
+        <Affliction identifier="internaldamage" strength="0.2" />
+        <Affliction identifier="lacerations" strength="0.3" />
+        <Affliction identifier="bleeding" strength="0.2" />
+      </Attack>
+      <!--
+	  <StatusEffect type="OnActive" target="This,NearbyCharacters" range="45" condition="-10">
+        <Conditional Condition="gt 96" />
+        <Affliction identifier="internaldamage" strength="2" />
+        <Affliction identifier="lacerations" strength="3" />
+        <Affliction identifier="bleeding" strength="1" />
+	  </StatusEffect>
+	  -->
+    </Projectile>
+  </Item>
+  <!-- 固定式推進器 D 05 -->
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedmedium500" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="168,0,304,224" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="0,0,224,224" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_medium_500" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_medium_500" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="112,112" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,250" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="168,0,304,224" origin="0.5, 0.3" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,160,152" origin="0.5, -0.6" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+        <!-- Hit detection is weird
+		<Explosion range="80.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" >
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</Explosion>
+		-->
+        <!--
+		<StatusEffect type="OnUse" target="This,NearbyCharacters" range="350">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</StatusEffect>
+		-->
+      </StatusEffect>
+      <!-- 改用新機制，以讓推進器可以正常的接電池，設計上參考探照燈，但不會有陰影 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="500" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_medium" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-1500" scalemin="1" scalemax="1.5" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="ekdockyard_newthrusterforcer_medium_500" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="27" />
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0.2">
+        <Affliction identifier="internaldamage" strength="0.4" />
+        <Affliction identifier="lacerations" strength="0.6" />
+        <Affliction identifier="bleeding" strength="0.4" />
+      </Attack>
+      <!--
+	  <StatusEffect type="OnActive" target="This,NearbyCharacters" range="45" condition="-10">
+        <Conditional Condition="gt 96" />
+        <Affliction identifier="internaldamage" strength="3" />
+        <Affliction identifier="lacerations" strength="4" />
+        <Affliction identifier="bleeding" strength="2" />
+	  </StatusEffect>
+	  -->
+    </Projectile>
+  </Item>
+  <!-- 固定式推進器 D 10 -->
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedmedium1000" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="168,0,304,224" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="0,0,224,224" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_medium_1000" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_medium_1000" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="112,112" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,250" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="168,0,304,224" origin="0.5, 0.3" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,160,152" origin="0.5, -0.6" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+        <!-- Hit detection is weird
+		<Explosion range="80.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" >
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</Explosion>
+		-->
+        <!--
+		<StatusEffect type="OnUse" target="This,NearbyCharacters" range="350">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</StatusEffect>
+		-->
+      </StatusEffect>
+      <!-- 改用新機制，以讓推進器可以正常的接電池，設計上參考探照燈，但不會有陰影 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="1000" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_medium" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-1500" scalemin="1.25" scalemax="1.75" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="ekdockyard_newthrusterforcer_medium_1000" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="55" />
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0.2">
+        <Affliction identifier="internaldamage" strength="0.4" />
+        <Affliction identifier="lacerations" strength="0.6" />
+        <Affliction identifier="bleeding" strength="0.4" />
+      </Attack>
+      <!--
+	  <StatusEffect type="OnActive" target="This,NearbyCharacters" range="45" condition="-10">
+        <Conditional Condition="gt 96" />
+        <Affliction identifier="internaldamage" strength="3" />
+        <Affliction identifier="lacerations" strength="4" />
+        <Affliction identifier="bleeding" strength="2" />
+	  </StatusEffect>
+	  -->
+    </Projectile>
+  </Item>
+  <!-- 新式固定式推進器，改良了原來只能用超級電容器驅動的新版BUG，將子彈的使用綁定到探照燈光上，將原來的電路的啟動改成切換燈光，並增加設置狀態(燈光)的選項 -->
+  <!-- 固定式推進器 D 20 -->
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedmedium2000" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" aliases="ekdockyard_newthrusterengine_mediumfixed,ek_vernorengine_medium" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="168,0,304,224" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="0,0,224,224" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_medium_2000" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_medium_2000" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="112,112" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,250" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="168,0,304,224" origin="0.5, 0.3" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,160,152" origin="0.5, -0.6" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+      </StatusEffect>
+      <!-- 新機制，參考探照燈改良而成 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="2000" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_medium" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-1500" scalemin="1.5" scalemax="2" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <!-- <input name="trigger_in" displayname="connection.activate" /> -->
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="ekdockyard_newthrusterforcer_medium_2000" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="110" />
+    <!--110-->
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0.2">
+        <Affliction identifier="internaldamage" strength="0.4" />
+        <Affliction identifier="lacerations" strength="0.6" />
+        <Affliction identifier="bleeding" strength="0.4" />
+      </Attack>
+    </Projectile>
+  </Item>
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedmediumalt300" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="160,224,224,208" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="0,224,128,128" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_mediumalt_300" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_mediumalt_300" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="64,64" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,150" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="160,224,224,208" origin="0.5, 0.35" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,1,1" origin="0.5, 0.5" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+        <!-- Hit detection is weird
+		<Explosion range="80.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" >
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</Explosion>
+		-->
+        <!--
+		<StatusEffect type="OnUse" target="This,NearbyCharacters" range="350">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</StatusEffect>
+		-->
+      </StatusEffect>
+      <!-- 新機制，參考探照燈改良而成 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="300" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_small" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-750" scalemin="1" scalemax="1" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="ekdockyard_newthrusterforcer_mediumalt_300" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="25" />
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0.2">
+        <Affliction identifier="internaldamage" strength="0.2" />
+        <Affliction identifier="lacerations" strength="0.3" />
+        <Affliction identifier="bleeding" strength="0.2" />
+      </Attack>
+      <!--
+	  <StatusEffect type="OnActive" target="This,NearbyCharacters" range="45" condition="-10">
+        <Conditional Condition="gt 96" />
+        <Affliction identifier="internaldamage" strength="2" />
+        <Affliction identifier="lacerations" strength="3" />
+        <Affliction identifier="bleeding" strength="1" />
+	  </StatusEffect>
+	  -->
+    </Projectile>
+  </Item>
+  <Item name="" description="" identifier="ekdockyard_newthrusterengine_fixedmediumalt500" Tags="engine" category="Machine" subcategory="ekr_dockyard_thrusterengines" interactthroughwalls="true" Scale="0.5" interactdistance="10" spritecolor="1.0,1.0,1.0,1.0" focusonselected="false" linkable="false">
+    <InventoryIcon texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="160,224,224,208" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%/Items/Engine/thruster_boundingbox.png" depth="0.8" sourcerect="0,224,128,128" canflipy="false" />
+    <BrokenSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.8" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="90" />
+    <!--<StaticBody width="60" radius="60" />-->
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" canbeselected="false" characterusable="true">
+      <StatusEffect type="Always" target="This" Condition="-10.0" disabledeltatime="true" interval="600.0" stackable="false">
+        <Conditional Condition="eq 100" />
+      </StatusEffect>
+      <Containable items="ekdockyard_newthrusterforcer_mediumalt_500" />
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="ekdockyard_newthrusterforcer_mediumalt_500" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <aitarget sightrange="500" soundrange="10000" />
+    <Turret canbeselected="false" characterusable="false" linkable="true" barrelpos="64,64" rotationlimits="270,270" powerconsumption="0.0" showchargeindicator="false" showprojectileindicator="false" recoildistance="0" reload="0" springstiffnesslowskill="50" springstiffnesshighskill="50" springdampinglowskill="10" springdampinghighskill="10" rotationspeedlowskill="8" rotationspeedhighskill="8" firingoffset="0,150" usefiringoffsetformuzzleflash="false">
+      <RailSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.805" sourcerect="160,224,224,208" origin="0.5, 0.35" />
+      <BarrelSprite texture="%ModDir%/Items/Engine/thruster_engines.png" depth="0.810" sourcerect="0,0,1,1" origin="0.5, 0.5" />
+      <!-- <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,0,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,0,256,256" /> -->
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="120.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" applyfireeffects="false" playtinnitus="false" onlyoutside="true">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="25" />
+        </Explosion>
+        <!-- Hit detection is weird
+		<Explosion range="80.0" structuredamage="0" force="250" severlimbsprobability="1.0" camerashake="0.0" flash="false" flames="false" smoke="false" shockwave="false" sparks="false" underwaterbubble="false" >
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</Explosion>
+		-->
+        <!--
+		<StatusEffect type="OnUse" target="This,NearbyCharacters" range="350">
+          <Affliction identifier="internaldamage" strength="15" />
+          <Affliction identifier="bleeding" strength="30" />
+		</StatusEffect>
+		-->
+      </StatusEffect>
+      <!-- 新機制，參考探照燈改良而成 -->
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" Flicker="0.0" range="0" castshadows="false" directional="true" IsOn="false" powerconsumption="500" drawbehindsubs="true" ignorecontinuoustoggle="true" InheritParentIsActive="false">
+        <StatusEffect type="OnActive" target="This">
+          <Use />
+        </StatusEffect>
+      </LightComponent>
+      <ParticleEmitter particle="ekdockyard_thrusterbubbles_small" particleamount="1" anglemin="-20" anglemax="20" velocitymin="-250" velocitymax="-750" scalemin="1" scalemax="1" />
+    </Turret>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="power_in" displayname="connection.powerin" />
+      <input name="position_in" displayname="sp.item.rotation.name" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_light" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="" identifier="ekdockyard_newthrusterforcer_mediumalt_500" tags="" hideinmenus="true" category="Misc" scale="1">
+    <Sprite texture="%ModDir%/Items/Engine/thruster_engines.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5" />
+    <Body radius="35" density="25" />
+    <Projectile characterusable="false" launchimpulse="45.0" targetforce="-45" sticktostructures="true" stickpermanently="true" maxtargetstohit="1">
+      <StatusEffect type="OnImpact" target="This" condition="-100" disabledeltatime="true" />
+      <StatusEffect type="OnActive" target="This" condition="-100" disabledeltatime="true" delay="0.07" />
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <Attack targetforce="-50" severlimbsprobability="0.2">
+        <Affliction identifier="internaldamage" strength="0.2" />
+        <Affliction identifier="lacerations" strength="0.3" />
+        <Affliction identifier="bleeding" strength="0.2" />
+      </Attack>
+      <!--
+	  <StatusEffect type="OnActive" target="This,NearbyCharacters" range="45" condition="-10">
+        <Conditional Condition="gt 96" />
+        <Affliction identifier="internaldamage" strength="2" />
+        <Affliction identifier="lacerations" strength="3" />
+        <Affliction identifier="bleeding" strength="1" />
+	  </StatusEffect>
+	  -->
+    </Projectile>
+  </Item>
+</Items>
